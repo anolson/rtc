@@ -32,7 +32,7 @@ func (t *Tuple) Add(other *Tuple) *Tuple {
 }
 
 // NewPoint returns a Tuple that represents a Point
-func NewPoint(x, y, z float64) *Tuple {
+func Point(x, y, z float64) *Tuple {
 	return &Tuple{
 		X: x,
 		Y: y,
@@ -42,7 +42,7 @@ func NewPoint(x, y, z float64) *Tuple {
 }
 
 // NewVector returns a Tuple that represents a Vector
-func NewVector(x, y, z float64) *Tuple {
+func Vector(x, y, z float64) *Tuple {
 	return &Tuple{
 		X: x,
 		Y: y,

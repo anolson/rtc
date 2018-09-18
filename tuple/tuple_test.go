@@ -34,7 +34,7 @@ func TestNewPoint(t *testing.T) {
 	x, y, z, w := 4.3, -4.2, 3.1, 1.0
 	tuple := &Tuple{X: x, Y: y, Z: z, W: w}
 
-	point := NewPoint(x, y, z)
+	point := Point(x, y, z)
 	assert.Equal(t, tuple, point)
 	assert.True(t, point.isPoint())
 	assert.False(t, point.isVector())
@@ -45,7 +45,7 @@ func TestNewVector(t *testing.T) {
 	x, y, z, w := 4.3, -4.2, 3.1, 0.0
 	tuple := &Tuple{X: x, Y: y, Z: z, W: w}
 
-	vector := NewVector(x, y, z)
+	vector := Vector(x, y, z)
 	assert.Equal(t, tuple, vector)
 	assert.True(t, tuple.isVector())
 	assert.False(t, tuple.isPoint())
