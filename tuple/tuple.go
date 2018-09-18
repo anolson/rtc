@@ -31,6 +31,16 @@ func (t *Tuple) Add(other *Tuple) *Tuple {
 	}
 }
 
+// Subtract a Tuple to another one
+func (t *Tuple) Subtract(other *Tuple) *Tuple {
+	return &Tuple{
+		X: t.X - other.X,
+		Y: t.Y - other.Y,
+		Z: t.Z - other.Z,
+		W: t.W - other.W,
+	}
+}
+
 // NewPoint returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{
