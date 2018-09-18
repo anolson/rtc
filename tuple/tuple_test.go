@@ -149,3 +149,10 @@ func TestNormalize(t *testing.T) {
 		assert.Equal(t, float64(1), normalized.Magnitude())
 	})
 }
+
+func TestDot(t *testing.T) {
+	v1 := Vector(1, 2, 3)
+	v2 := Vector(2, 3, 4)
+
+	assert.Equal(t, float64(20), Dot(v1, v2))
+}

@@ -91,6 +91,11 @@ func (t *Tuple) Normalize() *Tuple {
 	}
 }
 
+// Dot calulates the dot product of two vectors
+func Dot(a, b *Tuple) float64 {
+	return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z) + (a.W * b.W)
+}
+
 // Point returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{
