@@ -1,5 +1,7 @@
 package tuple
 
+import "math"
+
 const (
 	pointType  = float64(1)
 	vectorType = float64(0)
@@ -69,6 +71,13 @@ func (t *Tuple) Divide(value float64) *Tuple {
 		Z: t.Z / value,
 		W: t.W / value,
 	}
+}
+
+// Magnitude calculate the length of a vector
+func (t *Tuple) Magnitude() float64 {
+	squares := math.Pow(t.X, 2) + math.Pow(t.Y, 2) + math.Pow(t.Z, 2) + math.Pow(t.W, 2)
+
+	return math.Sqrt(squares)
 }
 
 // Point returns a Tuple that represents a Point

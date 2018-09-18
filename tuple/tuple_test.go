@@ -1,6 +1,7 @@
 package tuple
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stvp/assert"
@@ -104,4 +105,23 @@ func TestDivide(t *testing.T) {
 
 	result := t1.Divide(2)
 	assert.Equal(t, &Tuple{X: 0.5, Y: -1, Z: 1.5, W: 0.5}, result)
+}
+
+func TestMagnitude(t *testing.T) {
+	tests := []struct {
+		description string
+		vector      *Tuple
+		expected    float64
+	}{
+		{"Magnitude of vector(1, 0, 0)", Vector(1, 0, 0), float64(1)},
+		{"Magnitude of vector(0, 1, 0)", Vector(0, 1, 0), float64(1)},
+		{"Magnitude of vector(0, 0, 1)", Vector(0, 0, 1), float64(1)},
+		{"Magnitude of vector(1, 2, 3)", Vector(1, 2, 3), math.Sqrt(14)},
+		{"Magnitude of vector(-1, -2, -3)", Vector(-1, -2, -3), math.Sqrt(14)},
+	}
+
+	for _, test := range tests {
+		result := test.vector.Magnitude()
+		assert.Equal(t, test.expected, result)
+	}
 }
