@@ -96,6 +96,15 @@ func Dot(a, b *Tuple) float64 {
 	return (a.X * b.X) + (a.Y * b.Y) + (a.Z * b.Z) + (a.W * b.W)
 }
 
+// Cross calulates the cross product of two vectors
+func Cross(a, b *Tuple) *Tuple {
+	return Vector(
+		(a.Y*b.Z)-(a.Z*b.Y),
+		(a.Z*b.X)-(a.X*b.Z),
+		(a.X*b.Y)-(a.Y*b.X),
+	)
+}
+
 // Point returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{

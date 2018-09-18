@@ -156,3 +156,11 @@ func TestDot(t *testing.T) {
 
 	assert.Equal(t, float64(20), Dot(v1, v2))
 }
+
+func TestCross(t *testing.T) {
+	v1 := Vector(1, 2, 3)
+	v2 := Vector(2, 3, 4)
+
+	assert.Equal(t, Vector(-1, 2, -1), Cross(v1, v2))
+	assert.Equal(t, Vector(1, -2, 1), Cross(v2, v1))
+}
