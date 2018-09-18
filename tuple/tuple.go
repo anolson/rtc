@@ -51,7 +51,7 @@ func (t *Tuple) Negate() *Tuple {
 	}
 }
 
-// NewPoint returns a Tuple that represents a Point
+// Point returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{
 		X: x,
@@ -61,7 +61,7 @@ func Point(x, y, z float64) *Tuple {
 	}
 }
 
-// NewVector returns a Tuple that represents a Vector
+// Vector returns a Tuple that represents a Vector
 func Vector(x, y, z float64) *Tuple {
 	return &Tuple{
 		X: x,
