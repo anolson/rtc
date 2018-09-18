@@ -80,6 +80,17 @@ func (t *Tuple) Magnitude() float64 {
 	return math.Sqrt(squares)
 }
 
+// Normalize convert a vector to a unit vector
+func (t *Tuple) Normalize() *Tuple {
+	magnitude := t.Magnitude()
+	return &Tuple{
+		X: t.X / magnitude,
+		Y: t.Y / magnitude,
+		Z: t.Z / magnitude,
+		W: t.W / magnitude,
+	}
+}
+
 // Point returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{

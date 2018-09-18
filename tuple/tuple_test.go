@@ -111,7 +111,7 @@ func TestMagnitude(t *testing.T) {
 	tests := []struct {
 		description string
 		vector      *Tuple
-		expected    float64
+		magnitude   float64
 	}{
 		{"Magnitude of vector(1, 0, 0)", Vector(1, 0, 0), float64(1)},
 		{"Magnitude of vector(0, 1, 0)", Vector(0, 1, 0), float64(1)},
@@ -121,7 +121,31 @@ func TestMagnitude(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := test.vector.Magnitude()
-		assert.Equal(t, test.expected, result)
+		assert.Equal(t, test.magnitude, test.vector.Magnitude())
 	}
+}
+
+func TestNormalize(t *testing.T) {
+	tests := []struct {
+		description string
+		vector      *Tuple
+		normalized  *Tuple
+	}{
+		{"Normalizing vector(4, 0, 0)", Vector(4, 0, 0), Vector(1, 0, 0)},
+		{"Normalizing vector(1, 2, 3)", Vector(1, 2, 3), Vector(0.26726, 0.53452, 0.80178)},
+	}
+
+	for _, test := range tests {
+		normalized := test.vector.Normalize()
+		assert.True(t, floatEqual(normalized.X, test.normalized.X))
+		assert.True(t, floatEqual(normalized.Y, test.normalized.Y))
+		assert.True(t, floatEqual(normalized.Z, test.normalized.Z))
+	}
+
+	t.Run("Magnitude of a normalized vector is 1", func(t *testing.T) {
+		v := Vector(1, 2, 3)
+		normalized := v.Normalize()
+
+		assert.Equal(t, float64(1), normalized.Magnitude())
+	})
 }
