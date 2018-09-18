@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/anolson/rtc/util"
 	"github.com/stvp/assert"
 )
 
@@ -137,9 +138,9 @@ func TestNormalize(t *testing.T) {
 
 	for _, test := range tests {
 		normalized := test.vector.Normalize()
-		assert.True(t, Approx(normalized.X, test.normalized.X))
-		assert.True(t, Approx(normalized.Y, test.normalized.Y))
-		assert.True(t, Approx(normalized.Z, test.normalized.Z))
+		assert.True(t, util.Approx(normalized.X, test.normalized.X))
+		assert.True(t, util.Approx(normalized.Y, test.normalized.Y))
+		assert.True(t, util.Approx(normalized.Z, test.normalized.Z))
 	}
 
 	t.Run("Magnitude of a normalized vector is 1", func(t *testing.T) {
