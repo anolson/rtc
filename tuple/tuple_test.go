@@ -80,3 +80,11 @@ func TestNewVector(t *testing.T) {
 	assert.True(t, tuple.isVector())
 	assert.False(t, tuple.isPoint())
 }
+
+func TestAdd(t *testing.T) {
+	t1 := &Tuple{X: 3, Y: -2, Z: 5, W: 1}
+	t2 := &Tuple{X: -2, Y: 3, Z: 1, W: 0}
+
+	result := t1.Add(t2)
+	assert.Equal(t, &Tuple{X: 1, Y: 1, Z: 6, W: 1}, result)
+}

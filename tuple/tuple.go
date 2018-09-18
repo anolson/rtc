@@ -5,6 +5,7 @@ const (
 	vectorType = float64(0)
 )
 
+// Tuple represents a position
 type Tuple struct {
 	X float64
 	Y float64
@@ -18,6 +19,16 @@ func (t *Tuple) isPoint() bool {
 
 func (t *Tuple) isVector() bool {
 	return t.W == vectorType
+}
+
+// Add a Tuple to another one
+func (t *Tuple) Add(other *Tuple) *Tuple {
+	return &Tuple{
+		X: t.X + other.X,
+		Y: t.Y + other.Y,
+		Z: t.Z + other.Z,
+		W: t.W + other.W,
+	}
 }
 
 // NewPoint returns a Tuple that represents a Point
