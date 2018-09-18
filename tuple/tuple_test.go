@@ -84,3 +84,10 @@ func TestSubtract(t *testing.T) {
 		assert.Equal(t, Vector(-2, -4, -6), result)
 	})
 }
+
+func TestNegate(t *testing.T) {
+	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
+
+	result := t1.Negate()
+	assert.Equal(t, &Tuple{X: -1, Y: 2, Z: -3, W: -1}, result)
+}

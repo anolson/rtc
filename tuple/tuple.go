@@ -41,6 +41,16 @@ func (t *Tuple) Subtract(other *Tuple) *Tuple {
 	}
 }
 
+// Negate a Tuple
+func (t *Tuple) Negate() *Tuple {
+	return &Tuple{
+		X: float64(0) - t.X,
+		Y: float64(0) - t.Y,
+		Z: float64(0) - t.Z,
+		W: float64(0) - t.W,
+	}
+}
+
 // NewPoint returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{
