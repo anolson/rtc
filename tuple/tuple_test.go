@@ -91,3 +91,17 @@ func TestNegate(t *testing.T) {
 	result := t1.Negate()
 	assert.Equal(t, &Tuple{X: -1, Y: 2, Z: -3, W: -1}, result)
 }
+
+func TestMultiply(t *testing.T) {
+	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
+
+	result := t1.Multiply(3.5)
+	assert.Equal(t, &Tuple{X: 3.5, Y: -7, Z: 10.5, W: 3.5}, result)
+}
+
+func TestDivide(t *testing.T) {
+	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
+
+	result := t1.Divide(2)
+	assert.Equal(t, &Tuple{X: 0.5, Y: -1, Z: 1.5, W: 0.5}, result)
+}

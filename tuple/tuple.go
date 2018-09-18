@@ -51,6 +51,26 @@ func (t *Tuple) Negate() *Tuple {
 	}
 }
 
+// Multiply a Tuple by a value
+func (t *Tuple) Multiply(value float64) *Tuple {
+	return &Tuple{
+		X: t.X * value,
+		Y: t.Y * value,
+		Z: t.Z * value,
+		W: t.W * value,
+	}
+}
+
+// Divide a Tuple by a value
+func (t *Tuple) Divide(value float64) *Tuple {
+	return &Tuple{
+		X: t.X / value,
+		Y: t.Y / value,
+		Z: t.Z / value,
+		W: t.W / value,
+	}
+}
+
 // Point returns a Tuple that represents a Point
 func Point(x, y, z float64) *Tuple {
 	return &Tuple{
