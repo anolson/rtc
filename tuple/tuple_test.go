@@ -137,9 +137,9 @@ func TestNormalize(t *testing.T) {
 
 	for _, test := range tests {
 		normalized := test.vector.Normalize()
-		assert.True(t, floatEqual(normalized.X, test.normalized.X))
-		assert.True(t, floatEqual(normalized.Y, test.normalized.Y))
-		assert.True(t, floatEqual(normalized.Z, test.normalized.Z))
+		assert.True(t, Approx(normalized.X, test.normalized.X))
+		assert.True(t, Approx(normalized.Y, test.normalized.Y))
+		assert.True(t, Approx(normalized.Z, test.normalized.Z))
 	}
 
 	t.Run("Magnitude of a normalized vector is 1", func(t *testing.T) {
