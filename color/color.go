@@ -17,25 +17,25 @@ func RGB(r, g, b float64) *Color {
 }
 
 // Add a Color to another one
-func (c *Color) Add(other *Color) *Color {
+func Add(c1, c2 *Color) *Color {
 	return &Color{
-		Red:   c.Red + other.Red,
-		Green: c.Green + other.Green,
-		Blue:  c.Blue + other.Blue,
+		Red:   c1.Red + c2.Red,
+		Green: c1.Green + c2.Green,
+		Blue:  c1.Blue + c2.Blue,
 	}
 }
 
-// Subtract a Color to another one
-func (c *Color) Subtract(other *Color) *Color {
+// Subtract a Color from another one
+func Subtract(c1, c2 *Color) *Color {
 	return &Color{
-		Red:   c.Red - other.Red,
-		Green: c.Green - other.Green,
-		Blue:  c.Blue - other.Blue,
+		Red:   c1.Red - c2.Red,
+		Green: c1.Green - c2.Green,
+		Blue:  c1.Blue - c2.Blue,
 	}
 }
 
 // Multiply a Color by a scalar value
-func (c *Color) Multiply(value float64) *Color {
+func Multiply(c *Color, value float64) *Color {
 	return &Color{
 		Red:   c.Red * value,
 		Green: c.Green * value,
@@ -44,10 +44,10 @@ func (c *Color) Multiply(value float64) *Color {
 }
 
 // HadamardProduct multiplies each color component
-func (c *Color) HadamardProduct(other *Color) *Color {
+func HadamardProduct(c1, c2 *Color) *Color {
 	return &Color{
-		Red:   c.Red * other.Red,
-		Green: c.Green * other.Green,
-		Blue:  c.Blue * other.Blue,
+		Red:   c1.Red * c2.Red,
+		Green: c1.Green * c2.Green,
+		Blue:  c1.Blue * c2.Blue,
 	}
 }
