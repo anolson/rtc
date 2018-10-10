@@ -24,27 +24,27 @@ func (t *Tuple) isVector() bool {
 }
 
 // Add a Tuple to another one
-func (t *Tuple) Add(other *Tuple) *Tuple {
+func Add(a, b *Tuple) *Tuple {
 	return &Tuple{
-		X: t.X + other.X,
-		Y: t.Y + other.Y,
-		Z: t.Z + other.Z,
-		W: t.W + other.W,
+		X: a.X + b.X,
+		Y: a.Y + b.Y,
+		Z: a.Z + b.Z,
+		W: a.W + b.W,
 	}
 }
 
-// Subtract a Tuple to another one
-func (t *Tuple) Subtract(other *Tuple) *Tuple {
+// Subtract a Tuple from another one
+func Subtract(a, b *Tuple) *Tuple {
 	return &Tuple{
-		X: t.X - other.X,
-		Y: t.Y - other.Y,
-		Z: t.Z - other.Z,
-		W: t.W - other.W,
+		X: a.X - b.X,
+		Y: a.Y - b.Y,
+		Z: a.Z - b.Z,
+		W: a.W - b.W,
 	}
 }
 
 // Negate a Tuple
-func (t *Tuple) Negate() *Tuple {
+func Negate(t *Tuple) *Tuple {
 	return &Tuple{
 		X: float64(0) - t.X,
 		Y: float64(0) - t.Y,
@@ -54,7 +54,7 @@ func (t *Tuple) Negate() *Tuple {
 }
 
 // Multiply a Tuple by a value
-func (t *Tuple) Multiply(value float64) *Tuple {
+func Multiply(t *Tuple, value float64) *Tuple {
 	return &Tuple{
 		X: t.X * value,
 		Y: t.Y * value,
@@ -64,7 +64,7 @@ func (t *Tuple) Multiply(value float64) *Tuple {
 }
 
 // Divide a Tuple by a value
-func (t *Tuple) Divide(value float64) *Tuple {
+func Divide(t *Tuple, value float64) *Tuple {
 	return &Tuple{
 		X: t.X / value,
 		Y: t.Y / value,
