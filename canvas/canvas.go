@@ -3,6 +3,7 @@ package canvas
 import (
 	"errors"
 	"fmt"
+	"io"
 
 	"github.com/anolson/rtc/color"
 )
@@ -55,4 +56,11 @@ func (c *Canvas) PixelAt(x, y int) (*color.Color, error) {
 	}
 
 	return c.Pixels[y][x], nil
+}
+
+// Save saves the canvs to disk
+func (c *Canvas) Save(w io.Writer) {
+	fmt.Fprintf(w, "P3\n")
+	fmt.Fprintf(w, "%v %v\n", c.Width, c.Height)
+	fmt.Fprintf(w, "%v", 255)
 }

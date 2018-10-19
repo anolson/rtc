@@ -1,6 +1,7 @@
 package canvas
 
 import (
+	"bytes"
 	"fmt"
 	"testing"
 
@@ -34,4 +35,12 @@ func TestWritePixel(t *testing.T) {
 	pixel, err := c.PixelAt(2, 3)
 	assert.Nil(t, err)
 	assert.Equal(t, red, pixel)
+}
+
+func TestSave(t *testing.T) {
+	c := New(5, 3)
+
+	buffer := bytes.NewBuffer([]byte{})
+	c.Save(buffer)
+	assert.Equal(t, "P3\n5 3\n255", buffer.String())
 }
