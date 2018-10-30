@@ -54,15 +54,19 @@ func HadamardProduct(c1, c2 *Color) *Color {
 	}
 }
 
-// Scaled returns each color component scaled to lie between (min-max)
-func Scaled(c *Color, min, max float64) *Color {
+// ScaledRGBCompents returns each color component scaled to lie between 0 and 255
+func ScaledRGB(c *Color) *Color {
 	return &Color{
-		Red:   clamp(c.Red, min, max),
-		Green: clamp(c.Green, min, max),
-		Blue:  clamp(c.Blue, min, max),
+		Red:   scaledRGBCompoent(c.Red),
+		Green: scaledRGBCompoent(c.Green),
+		Blue:  scaledRGBCompoent(c.Blue),
 	}
 }
 
-func clamp(value, min, max float64) float64 {
-	return math.Max(min, math.Min(math.Round(value*max), max))
+func scaledRGBCompoent(value float64) float64 {
+	return clamp(math.Round(value * 255))
+}
+
+func clamp(value float64) float64 {
+	return math.Max(0, math.Min(value, 255))
 }

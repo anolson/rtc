@@ -69,7 +69,7 @@ func (c *Canvas) Save(w io.Writer) {
 		output := []string{}
 
 		for _, pixel := range row {
-			scaled := color.Scaled(pixel, 0, 255)
+			scaled := color.ScaledRGB(pixel)
 
 			p := fmt.Sprintf("%v %v %v", scaled.Red, scaled.Green, scaled.Blue)
 			output = append(output, p)
