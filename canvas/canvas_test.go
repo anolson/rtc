@@ -7,6 +7,7 @@ import (
 
 	"github.com/anolson/rtc/color"
 	"github.com/stvp/assert"
+	"gotest.tools/golden"
 )
 
 func TestNew(t *testing.T) {
@@ -42,5 +43,5 @@ func TestSave(t *testing.T) {
 
 	buffer := bytes.NewBuffer([]byte{})
 	c.Save(buffer)
-	assert.Equal(t, "P3\n5 3\n255", buffer.String())
+	golden.Assert(t, buffer.String(), "ppm_header.golden")
 }
