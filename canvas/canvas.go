@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/anolson/rtc/color"
 )
@@ -62,5 +63,18 @@ func (c *Canvas) PixelAt(x, y int) (*color.Color, error) {
 func (c *Canvas) Save(w io.Writer) {
 	fmt.Fprintf(w, "P3\n")
 	fmt.Fprintf(w, "%v %v\n", c.Width, c.Height)
-	fmt.Fprintf(w, "%v", 255)
+	fmt.Fprintf(w, "%v\n", 255)
+
+	for _, row := range c.Pixels {
+		output := []string{}
+
+		for _, pixel := range row {
+			scaled := color.Scaled(pixel, 0, 255)
+
+			p := fmt.Sprintf("%v %v %v", scaled.Red, scaled.Green, scaled.Blue)
+			output = append(output, p)
+		}
+
+		fmt.Fprintf(w, "%v\n", strings.Join(output, " "))
+	}
 }

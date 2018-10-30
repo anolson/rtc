@@ -39,9 +39,27 @@ func TestWritePixel(t *testing.T) {
 }
 
 func TestSave(t *testing.T) {
-	c := New(5, 3)
+	t.Run("Constructing the PPM header", func(t *testing.T) {
+		c := New(5, 3)
+		buffer := bytes.NewBuffer([]byte{})
 
-	buffer := bytes.NewBuffer([]byte{})
-	c.Save(buffer)
-	golden.Assert(t, buffer.String(), "ppm_header.golden")
+		c.Save(buffer)
+
+		golden.Assert(t, buffer.String(), "ppm_header.golden")
+	})
+
+	t.Run("Constructing the PPM pixel data", func(t *testing.T) {
+		c := New(5, 3)
+		c1 := color.RGB(1.5, 0, 0)
+		c2 := color.RGB(0, 0.5, 0)
+		c3 := color.RGB(-0.5, 0, 1)
+		c.WritePixel(0, 0, c1)
+		c.WritePixel(2, 1, c2)
+		c.WritePixel(4, 2, c3)
+		buffer := bytes.NewBuffer([]byte{})
+
+		c.Save(buffer)
+
+		golden.Assert(t, buffer.String(), "ppm_canvas.golden")
+	})
 }

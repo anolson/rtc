@@ -1,5 +1,7 @@
 package color
 
+import "math"
+
 // Color represents an rgb color
 type Color struct {
 	Red   float64
@@ -50,4 +52,17 @@ func HadamardProduct(c1, c2 *Color) *Color {
 		Green: c1.Green * c2.Green,
 		Blue:  c1.Blue * c2.Blue,
 	}
+}
+
+// Scaled returns each color component scaled to lie between (min-max)
+func Scaled(c *Color, min, max float64) *Color {
+	return &Color{
+		Red:   clamp(c.Red, min, max),
+		Green: clamp(c.Green, min, max),
+		Blue:  clamp(c.Blue, min, max),
+	}
+}
+
+func clamp(value, min, max float64) float64 {
+	return math.Max(min, math.Min(math.Round(value*max), max))
 }
