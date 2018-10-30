@@ -54,7 +54,7 @@ func HadamardProduct(c1, c2 *Color) *Color {
 	}
 }
 
-// ScaledRGBCompents returns each color component scaled to lie between 0 and 255
+// ScaledRGB returns each color component scaled to lie between 0 and 255
 func ScaledRGB(c *Color) *Color {
 	return &Color{
 		Red:   scaledRGBComponent(c.Red),
