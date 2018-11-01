@@ -62,4 +62,20 @@ func TestSave(t *testing.T) {
 
 		golden.Assert(t, buffer.String(), "ppm_canvas.golden")
 	})
+
+	t.Run("Splitting long lines in PPM files", func(t *testing.T) {
+		c := New(10, 2)
+		color := color.RGB(1, 0.8, 0.6)
+
+		for y := 0; y < 2; y++ {
+			for x := 0; x < 10; x++ {
+				c.WritePixel(x, y, color)
+			}
+		}
+		buffer := bytes.NewBuffer([]byte{})
+
+		c.Save(buffer)
+
+		golden.Assert(t, buffer.String(), "ppm_canvas_line_wrap.golden")
+	})
 }

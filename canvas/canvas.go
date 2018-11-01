@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/anolson/rtc/color"
+
+	wordwrap "github.com/mitchellh/go-wordwrap"
 )
 
 // Canvas represents a rectagular grid of pixels
@@ -75,6 +77,7 @@ func (c *Canvas) Save(w io.Writer) {
 			output = append(output, p)
 		}
 
-		fmt.Fprintf(w, "%v\n", strings.Join(output, " "))
+		line := strings.Join(output, " ")
+		fmt.Fprintf(w, "%v\n", wordwrap.WrapString(line, 70))
 	}
 }
