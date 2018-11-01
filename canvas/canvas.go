@@ -80,4 +80,5 @@ func (c *Canvas) Save(w io.Writer) {
 		line := strings.Join(output, " ")
 		fmt.Fprintf(w, "%v\n", wordwrap.WrapString(line, 70))
 	}
+	fmt.Fprintf(w, "\n")
 }
