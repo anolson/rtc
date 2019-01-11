@@ -4,6 +4,7 @@ import (
 	"math"
 	"testing"
 
+	"github.com/anolson/rtc/util"
 	"github.com/stvp/assert"
 )
 
@@ -56,7 +57,7 @@ func TestAdd(t *testing.T) {
 	t1 := &Tuple{X: 3, Y: -2, Z: 5, W: 1}
 	t2 := &Tuple{X: -2, Y: 3, Z: 1, W: 0}
 
-	result := t1.Add(t2)
+	result := Add(t1, t2)
 	assert.Equal(t, &Tuple{X: 1, Y: 1, Z: 6, W: 1}, result)
 }
 
@@ -65,7 +66,7 @@ func TestSubtract(t *testing.T) {
 		p1 := Point(3, 2, 1)
 		p2 := Point(5, 6, 7)
 
-		result := p1.Subtract(p2)
+		result := Subtract(p1, p2)
 		assert.Equal(t, Vector(-2, -4, -6), result)
 	})
 
@@ -73,7 +74,7 @@ func TestSubtract(t *testing.T) {
 		p := Point(3, 2, 1)
 		v := Vector(5, 6, 7)
 
-		result := p.Subtract(v)
+		result := Subtract(p, v)
 		assert.Equal(t, Point(-2, -4, -6), result)
 	})
 
@@ -81,7 +82,7 @@ func TestSubtract(t *testing.T) {
 		v1 := Vector(3, 2, 1)
 		v2 := Vector(5, 6, 7)
 
-		result := v1.Subtract(v2)
+		result := Subtract(v1, v2)
 		assert.Equal(t, Vector(-2, -4, -6), result)
 	})
 }
@@ -89,21 +90,21 @@ func TestSubtract(t *testing.T) {
 func TestNegate(t *testing.T) {
 	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
 
-	result := t1.Negate()
+	result := Negate(t1)
 	assert.Equal(t, &Tuple{X: -1, Y: 2, Z: -3, W: -1}, result)
 }
 
 func TestMultiply(t *testing.T) {
 	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
 
-	result := t1.Multiply(3.5)
+	result := Multiply(t1, 3.5)
 	assert.Equal(t, &Tuple{X: 3.5, Y: -7, Z: 10.5, W: 3.5}, result)
 }
 
 func TestDivide(t *testing.T) {
 	t1 := &Tuple{X: 1, Y: -2, Z: 3, W: 1}
 
-	result := t1.Divide(2)
+	result := Divide(t1, 2)
 	assert.Equal(t, &Tuple{X: 0.5, Y: -1, Z: 1.5, W: 0.5}, result)
 }
 
@@ -137,9 +138,9 @@ func TestNormalize(t *testing.T) {
 
 	for _, test := range tests {
 		normalized := test.vector.Normalize()
-		assert.True(t, Approx(normalized.X, test.normalized.X))
-		assert.True(t, Approx(normalized.Y, test.normalized.Y))
-		assert.True(t, Approx(normalized.Z, test.normalized.Z))
+		assert.True(t, util.Approx(normalized.X, test.normalized.X))
+		assert.True(t, util.Approx(normalized.Y, test.normalized.Y))
+		assert.True(t, util.Approx(normalized.Z, test.normalized.Z))
 	}
 
 	t.Run("Magnitude of a normalized vector is 1", func(t *testing.T) {
