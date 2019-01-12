@@ -104,23 +104,3 @@ func Cross(a, b *Tuple) *Tuple {
 		(a.X*b.Y)-(a.Y*b.X),
 	)
 }
-
-// Point returns a Tuple that represents a Point
-func Point(x, y, z float64) *Tuple {
-	return &Tuple{
-		X: x,
-		Y: y,
-		Z: z,
-		W: pointType,
-	}
-}
-
-// Vector returns a Tuple that represents a Vector
-func Vector(x, y, z float64) *Tuple {
-	return &Tuple{
-		X: x,
-		Y: y,
-		Z: z,
-		W: vectorType,
-	}
-}
