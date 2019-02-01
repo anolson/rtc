@@ -1,8 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"bytes"
+	"io/ioutil"
+	"math"
 
+	"github.com/anolson/rtc/canvas"
+	"github.com/anolson/rtc/color"
 	"github.com/anolson/rtc/tuple"
 )
 
@@ -31,26 +35,40 @@ func newEnvironment(gravity, wind *tuple.Tuple) *environment {
 }
 
 func main() {
+	start := tuple.Point(0, 1, 0)
+	velocity := tuple.Vector(1, 1.8, 0).Normalize()
+	proj := newProjectile(start, tuple.Multiply(velocity, 11.25))
+
 	gravity := tuple.Vector(0, -0.1, 0)
 	wind := tuple.Vector(-0.01, 0, 0)
 	env := newEnvironment(gravity, wind)
 
-	position := tuple.Point(0, 1, 0)
-	velocity := tuple.Vector(0, 1, 0).Normalize()
-	proj := newProjectile(position, tuple.Multiply(velocity, 1))
-
-	tickCount := 0
+	positions := []*tuple.Tuple{}
 	for {
 		proj = tick(env, proj)
 		if proj.position.Y <= 0 {
 			break
 		}
 
-		tickCount++
-		fmt.Printf("Projectile now at - x: %0.2f y: %0.2f\n", proj.position.X, proj.position.Y)
+		positions = append(positions, proj.position)
 	}
 
-	fmt.Printf("Total ticks: %v\n", tickCount)
+	red := color.RGB(0.9, 0.6, 0.75)
+	c := canvas.New(900, 650)
+	for _, position := range positions {
+		x := int(math.Abs(math.Round(position.X)))
+		y := c.Height - int(math.Round(position.Y))
+
+		err := c.WritePixel(x, y, red)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	buffer := bytes.NewBuffer([]byte{})
+	c.Save(buffer)
+
+	ioutil.WriteFile("example.ppm", buffer.Bytes(), 0644)
 }
 
 func tick(env *environment, proj *projectile) *projectile {
