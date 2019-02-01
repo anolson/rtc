@@ -34,6 +34,13 @@ func newEnvironment(gravity, wind *tuple.Tuple) *environment {
 	}
 }
 
+func (env *environment) tick(proj *projectile) *projectile {
+	position := tuple.Add(proj.position, proj.velocity)
+	velocity := tuple.Add(proj.velocity, tuple.Add(env.gravity, env.wind))
+
+	return newProjectile(position, velocity)
+}
+
 func main() {
 	start := tuple.Point(0, 1, 0)
 	velocity := tuple.Vector(1, 1.8, 0).Normalize()
@@ -45,7 +52,7 @@ func main() {
 
 	positions := []*tuple.Tuple{}
 	for {
-		proj = tick(env, proj)
+		proj = env.tick(proj)
 		if proj.position.Y <= 0 {
 			break
 		}
@@ -69,11 +76,4 @@ func main() {
 	c.Save(buffer)
 
 	ioutil.WriteFile("example.ppm", buffer.Bytes(), 0644)
-}
-
-func tick(env *environment, proj *projectile) *projectile {
-	position := tuple.Add(proj.position, proj.velocity)
-	velocity := tuple.Add(proj.velocity, tuple.Add(env.gravity, env.wind))
-
-	return newProjectile(position, velocity)
 }
