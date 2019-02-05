@@ -48,3 +48,29 @@ func TestNew(t *testing.T) {
 		assert.Equal(t, 15.5, m.At(3, 2))
 	})
 }
+
+func TestEqual(t *testing.T) {
+	m := New(4, 4, []float64{
+		1.0, 2.0, 3.0, 4.0,
+		5.0, 6.0, 7.0, 8.0,
+		9.0, 8.0, 7.0, 6.0,
+		5.0, 4.0, 3.0, 2.0,
+	})
+
+	other := New(4, 4, []float64{
+		1.0, 2.0, 3.0, 4.0,
+		5.0, 6.0, 7.0, 8.0,
+		9.0, 8.0, 7.0, 6.0,
+		5.0, 4.0, 3.0, 2.000001,
+	})
+
+	otherNotEqual := New(4, 4, []float64{
+		2.0, 3.0, 4.0, 5.0,
+		6.0, 7.0, 8.0, 9.0,
+		8.0, 7.0, 6.0, 5.0,
+		4.0, 3.0, 2.0, 1.0,
+	})
+
+	assert.True(t, m.Equal(other))
+	assert.False(t, m.Equal(otherNotEqual))
+}
