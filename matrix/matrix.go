@@ -5,12 +5,14 @@ import (
 	"github.com/anolson/rtc/util"
 )
 
+// Matrix is a data structure for storing a grid of numbers
 type Matrix struct {
 	rows int
 	cols int
 	data []float64
 }
 
+// New returns a new Matrix object
 func New(rows, cols int, data []float64) *Matrix {
 	if data == nil {
 		data = make([]float64, rows*cols)
@@ -23,6 +25,7 @@ func New(rows, cols int, data []float64) *Matrix {
 	}
 }
 
+// At returns the value at i, j
 func (m *Matrix) At(i, j int) float64 {
 	index := m.cols*i + j
 
@@ -33,6 +36,7 @@ func (m *Matrix) At(i, j int) float64 {
 	return m.data[index]
 }
 
+// Set assigns the value at i, j
 func (m *Matrix) Set(i, j int, value float64) {
 	index := m.cols*i + j
 
@@ -41,6 +45,7 @@ func (m *Matrix) Set(i, j int, value float64) {
 	}
 }
 
+// Equal compares a two matrices
 func (m *Matrix) Equal(other *Matrix) bool {
 	for i := 0; i < m.rows; i++ {
 		for j := 0; j < m.cols; j++ {
@@ -53,6 +58,7 @@ func (m *Matrix) Equal(other *Matrix) bool {
 	return true
 }
 
+// Row returns the row at the given index
 func (m *Matrix) Row(index int) []float64 {
 	offset := m.cols * index
 
@@ -63,6 +69,7 @@ func (m *Matrix) Row(index int) []float64 {
 	return m.data[offset : offset+m.cols]
 }
 
+// Col returns the column at the given index
 func (m *Matrix) Col(index int) []float64 {
 	col := []float64{}
 
@@ -73,6 +80,7 @@ func (m *Matrix) Col(index int) []float64 {
 	return col
 }
 
+// MultiplyMatrix multiplies two matrices together
 func (m *Matrix) MultiplyMatrix(other *Matrix) *Matrix {
 	result := New(m.rows, m.cols, nil)
 
@@ -93,6 +101,7 @@ func (m *Matrix) MultiplyMatrix(other *Matrix) *Matrix {
 	return result
 }
 
+// MultiplyTuple multiplies a Matrix and a Tuple together
 func (m *Matrix) MultiplyTuple(t *tuple.Tuple) *tuple.Tuple {
 	result := make([]float64, 4)
 
