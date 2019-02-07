@@ -15,6 +15,16 @@ type Tuple struct {
 	W float64
 }
 
+// New returns a new a Tuple object
+func New(x, y, z, w float64) *Tuple {
+	return &Tuple{
+		X: x,
+		Y: y,
+		Z: z,
+		W: w,
+	}
+}
+
 func (t *Tuple) isPoint() bool {
 	return t.W == pointType
 }

@@ -3,6 +3,7 @@ package matrix
 import (
 	"testing"
 
+	"github.com/anolson/rtc/tuple"
 	"github.com/stvp/assert"
 )
 
@@ -103,7 +104,7 @@ func TestCol(t *testing.T) {
 	assert.Equal(t, []float64{4.0, 8.0, 6.0, 2.0}, m.Col(3))
 }
 
-func TestMultiply(t *testing.T) {
+func TestMultiplyMatrix(t *testing.T) {
 	a := New(4, 4, []float64{
 		1.0, 2.0, 3.0, 4.0,
 		5.0, 6.0, 7.0, 8.0,
@@ -125,5 +126,19 @@ func TestMultiply(t *testing.T) {
 		16.0, 26.0, 46.0, 42.0,
 	})
 
-	assert.Equal(t, result, a.Multiply(b))
+	assert.Equal(t, result, a.MultiplyMatrix(b))
+}
+
+func TestMultiplyTuple(t *testing.T) {
+	a := New(4, 4, []float64{
+		1, 2, 3, 4,
+		2, 4, 4, 2,
+		8, 6, 4, 1,
+		0, 0, 0, 1,
+	})
+
+	b := tuple.New(1, 2, 3, 1)
+	result := tuple.New(18.0, 24.0, 33.0, 1.0)
+
+	assert.Equal(t, result, a.MultiplyTuple(b))
 }

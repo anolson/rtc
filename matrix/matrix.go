@@ -1,6 +1,7 @@
 package matrix
 
 import (
+	"github.com/anolson/rtc/tuple"
 	"github.com/anolson/rtc/util"
 )
 
@@ -72,11 +73,11 @@ func (m *Matrix) Col(index int) []float64 {
 	return col
 }
 
-func (m *Matrix) Multiply(other *Matrix) *Matrix {
+func (m *Matrix) MultiplyMatrix(other *Matrix) *Matrix {
 	result := New(m.rows, m.cols, nil)
 
 	for i := 0; i < m.rows; i++ {
-		for j := 0; j < m.cols; j++ {
+		for j := 0; j < other.cols; j++ {
 			row := m.Row(i)
 			col := other.Col(j)
 
@@ -90,4 +91,22 @@ func (m *Matrix) Multiply(other *Matrix) *Matrix {
 	}
 
 	return result
+}
+
+func (m *Matrix) MultiplyTuple(t *tuple.Tuple) *tuple.Tuple {
+	result := make([]float64, 4)
+
+	for i := 0; i < m.rows; i++ {
+		row := m.Row(i)
+		col := []float64{t.X, t.Y, t.Z, t.W}
+
+		var accumulator float64
+		for j := 0; j < len(row); j++ {
+			accumulator = accumulator + (row[j] * col[j])
+		}
+
+		result[i] = accumulator
+	}
+
+	return tuple.New(result[0], result[1], result[2], result[3])
 }
