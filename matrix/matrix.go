@@ -119,3 +119,14 @@ func (m *Matrix) MultiplyTuple(t *tuple.Tuple) *tuple.Tuple {
 
 	return tuple.New(result[0], result[1], result[2], result[3])
 }
+
+// Transpose transposes a matrix, convert the columns in to rows (and vice versa)
+func (m *Matrix) Transpose() *Matrix {
+	result := []float64{}
+
+	for i := 0; i < m.cols; i++ {
+		result = append(result, m.Col(i)...)
+	}
+
+	return New(m.rows, m.cols, result)
+}
