@@ -142,3 +142,33 @@ func TestMultiplyTuple(t *testing.T) {
 
 	assert.Equal(t, result, a.MultiplyTuple(b))
 }
+
+func TestMultiplyByIdentityMatrix(t *testing.T) {
+	a := New(4, 4, []float64{
+		0, 1, 2, 4,
+		1, 2, 4, 8,
+		2, 4, 8, 16,
+		4, 8, 16, 32,
+	})
+
+	identityMatrix := New(4, 4, []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	})
+
+	assert.Equal(t, a, a.MultiplyMatrix(identityMatrix))
+}
+
+func TestMultiplyIdentityMatrixByTuple(t *testing.T) {
+	a := tuple.New(1, 2, 3, 1)
+	identityMatrix := New(4, 4, []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	})
+
+	assert.Equal(t, a, identityMatrix.MultiplyTuple(a))
+}
