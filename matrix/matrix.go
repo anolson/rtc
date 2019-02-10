@@ -1,6 +1,8 @@
 package matrix
 
 import (
+	"fmt"
+
 	"github.com/anolson/rtc/tuple"
 	"github.com/anolson/rtc/util"
 )
@@ -129,4 +131,41 @@ func (m *Matrix) Transpose() *Matrix {
 	}
 
 	return New(m.rows, m.cols, result)
+}
+
+// SubMatrix returns the submatrix at row, col
+func (m *Matrix) Submatrix(i, j int) *Matrix {
+	result := []float64{}
+
+	for k := 0; k < m.rows; k++ {
+		if k == i {
+			continue
+		}
+
+		row := m.Row(k)
+		row = append(row[:j], row[j+1:]...)
+
+		result = append(result, row...)
+	}
+
+	fmt.Println(result)
+
+	return New(m.rows-1, m.cols-1, result)
+}
+
+func (m *Matrix) Minor(i, j int) *Matrix {
+	return New(0, 0, nil)
+
+}
+
+func (m *Matrix) Cofactor(i, j int) *Matrix {
+	return New(0, 0, nil)
+}
+
+func (m *Matrix) Determinant() float64 {
+	return 0
+}
+
+func (m *Matrix) Inverse() *Matrix {
+	return New(0, 0, nil)
 }

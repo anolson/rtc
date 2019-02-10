@@ -201,3 +201,37 @@ func TestTransposeIdentityMatrix(t *testing.T) {
 
 	assert.Equal(t, identityMatrix, identityMatrix.Transpose())
 }
+
+func TestSubMatrix(t *testing.T) {
+	t.Run("A submatrix of a 3x3 matrix is a 2x2 matrix", func(t *testing.T) {
+		m := New(3, 3, []float64{
+			1, 5, 0,
+			-3, 2, 7,
+			0, 6, 3,
+		})
+
+		result := New(2, 2, []float64{
+			-3, 2,
+			0, 6,
+		})
+
+		assert.Equal(t, result, m.Submatrix(0, 2))
+	})
+
+	t.Run("A submatrix of a 4x4 matrix is a 3x3 matrix", func(t *testing.T) {
+		m := New(4, 4, []float64{
+			-6, 1, 1, 6,
+			-8, 5, 8, 6,
+			-1, 0, 8, -2,
+			-7, 1, -1, 1,
+		})
+
+		result := New(3, 3, []float64{
+			-6, 1, 6,
+			-8, 8, 6,
+			-7, -1, 1,
+		})
+
+		assert.Equal(t, result, m.Submatrix(2, 1))
+	})
+}
