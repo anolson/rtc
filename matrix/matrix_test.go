@@ -235,3 +235,14 @@ func TestSubMatrix(t *testing.T) {
 		assert.Equal(t, result, m.Submatrix(2, 1))
 	})
 }
+
+func TestDterminant(t *testing.T) {
+	t.Run("Calulating the determinant of a 2x2 matrix", func(t *testing.T) {
+		m := New(2, 2, []float64{
+			1, 5,
+			-3, 2,
+		})
+
+		assert.Equal(t, float64(17), m.Determinant())
+	})
+}

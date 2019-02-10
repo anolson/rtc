@@ -163,7 +163,7 @@ func (m *Matrix) Cofactor(i, j int) *Matrix {
 }
 
 func (m *Matrix) Determinant() float64 {
-	return 0
+	return m.data[0]*m.data[3] - m.data[1]*m.data[2]
 }
 
 func (m *Matrix) Inverse() *Matrix {
