@@ -260,3 +260,18 @@ func TestMinor(t *testing.T) {
 		assert.Equal(t, float64(25), m.Minor(1, 0))
 	})
 }
+
+func TestCofactor(t *testing.T) {
+	t.Run("Calulating the cofactor of a 3x3 matrix", func(t *testing.T) {
+		m := New(3, 3, []float64{
+			3, 5, 0,
+			2, -1, -7,
+			6, -1, 5,
+		})
+
+		assert.Equal(t, float64(-12), m.Minor(0, 0))
+		assert.Equal(t, float64(-12), m.Cofactor(0, 0))
+		assert.Equal(t, float64(25), m.Minor(1, 0))
+		assert.Equal(t, float64(-25), m.Cofactor(1, 0))
+	})
+}

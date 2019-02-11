@@ -155,8 +155,15 @@ func (m *Matrix) Minor(i, j int) float64 {
 	return m.Submatrix(i, j).Determinant()
 }
 
-func (m *Matrix) Cofactor(i, j int) *Matrix {
-	return New(0, 0, nil)
+// Cofactor caclulates the cofactor of a matrix at row, col
+func (m *Matrix) Cofactor(i, j int) float64 {
+	minor := m.Minor(i, j)
+
+	if ((i + j) % 2) != 0 {
+		return -minor
+	}
+
+	return minor
 }
 
 func (m *Matrix) Determinant() float64 {
