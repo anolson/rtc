@@ -1,8 +1,6 @@
 package matrix
 
 import (
-	"fmt"
-
 	"github.com/anolson/rtc/tuple"
 	"github.com/anolson/rtc/util"
 )
@@ -133,7 +131,7 @@ func (m *Matrix) Transpose() *Matrix {
 	return New(m.rows, m.cols, result)
 }
 
-// SubMatrix returns the submatrix at row, col
+// Submatrix returns the submatrix by removing the provided row, col
 func (m *Matrix) Submatrix(i, j int) *Matrix {
 	result := []float64{}
 
@@ -142,13 +140,12 @@ func (m *Matrix) Submatrix(i, j int) *Matrix {
 			continue
 		}
 
-		row := m.Row(k)
-		row = append(row[:j], row[j+1:]...)
-
-		result = append(result, row...)
+		for rowIndex, value := range m.Row(k) {
+			if rowIndex != j {
+				result = append(result, value)
+			}
+		}
 	}
-
-	fmt.Println(result)
 
 	return New(m.rows-1, m.cols-1, result)
 }
