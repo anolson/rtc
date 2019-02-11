@@ -358,11 +358,7 @@ func TestInverse(t *testing.T) {
 
 		result, err := m.Inverse()
 		assert.Nil(t, err)
-		for i := 0; i < m.rows; i++ {
-			for j := 0; j < m.cols; j++ {
-				assert.True(t, util.Approx(inverse.At(i, j), result.At(i, j)))
-			}
-		}
+		assert.True(t, inverse.Equal(result))
 	})
 
 	t.Run("Multiplying a product by its inverse", func(t *testing.T) {
@@ -385,10 +381,6 @@ func TestInverse(t *testing.T) {
 		assert.Nil(t, err)
 
 		result := c.MultiplyMatrix(inverse)
-		for i := 0; i < result.rows; i++ {
-			for j := 0; j < result.cols; j++ {
-				assert.True(t, util.Approx(a.At(i, j), result.At(i, j)))
-			}
-		}
+		assert.True(t, a.Equal(result))
 	})
 }
