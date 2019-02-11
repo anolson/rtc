@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/anolson/rtc/tuple"
+	"github.com/anolson/rtc/util"
 	"github.com/stvp/assert"
 )
 
@@ -327,5 +328,64 @@ func TestIsInvertible(t *testing.T) {
 
 		assert.Equal(t, float64(0), m.Determinant())
 		assert.False(t, m.IsInvertible())
+	})
+}
+
+func TestInverse(t *testing.T) {
+	t.Run("Calculate the inverse of a matrix", func(t *testing.T) {
+		m := New(4, 4, []float64{
+			-5, 2, 6, -8,
+			1, -5, 1, 8,
+			7, 7, -6, -7,
+			1, -3, 7, 4,
+		})
+
+		inverse := New(4, 4, []float64{
+			0.21805, 0.45113, 0.24060, -0.04511,
+			-0.80827, -1.45677, -0.44361, 0.52068,
+			-0.07895, -0.22368, -0.05263, 0.19737,
+			-0.52256, -0.81391, -0.30075, 0.30639,
+		})
+
+		determinant := m.Determinant()
+		assert.Equal(t, float64(532), determinant)
+
+		assert.Equal(t, float64(-160), m.Cofactor(2, 3))
+		assert.True(t, util.Approx(inverse.At(3, 2), m.Cofactor(2, 3)/determinant))
+
+		assert.Equal(t, float64(105), m.Cofactor(3, 2))
+		assert.True(t, util.Approx(inverse.At(2, 3), m.Cofactor(3, 2)/determinant))
+
+		result := m.Inverse()
+		for i := 0; i < m.rows; i++ {
+			for j := 0; j < m.cols; j++ {
+				assert.True(t, util.Approx(inverse.At(i, j), result.At(i, j)))
+			}
+		}
+	})
+
+	t.Run("Multiplying a product by its inverse", func(t *testing.T) {
+		a := New(4, 4, []float64{
+			3, -9, 7, 3,
+			3, -8, 2, -9,
+			4, 4, 4, 1,
+			6, 5, -1, 1,
+		})
+
+		b := New(4, 4, []float64{
+			8, 2, 2, 2,
+			3, -1, 7, 0,
+			7, 0, 5, 4,
+			6, -2, 0, 5,
+		})
+
+		c := a.MultiplyMatrix(b)
+		result := c.MultiplyMatrix(b.Inverse())
+		for i := 0; i < result.rows; i++ {
+			for j := 0; j < result.cols; j++ {
+				assert.True(t, util.Approx(a.At(i, j), result.At(i, j)))
+			}
+		}
+
 	})
 }

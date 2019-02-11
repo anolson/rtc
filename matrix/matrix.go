@@ -181,10 +181,20 @@ func (m *Matrix) Determinant() float64 {
 }
 
 func (m *Matrix) Inverse() *Matrix {
-	return New(0, 0, nil)
+	result := New(m.rows, m.cols, nil)
+	determinant := m.Determinant()
+
+	for i := 0; i < m.rows; i++ {
+		for j := 0; j < m.cols; j++ {
+			cofactor := m.Cofactor(i, j)
+			result.Set(j, i, (cofactor / determinant))
+		}
+	}
+
+	return result
 }
 
-// IsInvertible determintes if a matrix can be inverted
+// IsInvertible determines if a matrix can be inverted
 func (m *Matrix) IsInvertible() bool {
 	return m.Determinant() != 0
 }
