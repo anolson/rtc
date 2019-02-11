@@ -1,8 +1,14 @@
 package matrix
 
 import (
+	"errors"
+
 	"github.com/anolson/rtc/tuple"
 	"github.com/anolson/rtc/util"
+)
+
+var (
+	ErrNotInvertible = errors.New("Not Invertible")
 )
 
 // Matrix is a data structure for storing a grid of numbers
@@ -180,7 +186,12 @@ func (m *Matrix) Determinant() float64 {
 	return result
 }
 
-func (m *Matrix) Inverse() *Matrix {
+// Inverse caclulates the inverse of a matrix
+func (m *Matrix) Inverse() (*Matrix, error) {
+	if !m.IsInvertible() {
+		return nil, ErrNotInvertible
+	}
+
 	result := New(m.rows, m.cols, nil)
 	determinant := m.Determinant()
 
@@ -191,7 +202,7 @@ func (m *Matrix) Inverse() *Matrix {
 		}
 	}
 
-	return result
+	return result, nil
 }
 
 // IsInvertible determines if a matrix can be inverted

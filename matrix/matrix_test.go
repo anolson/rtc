@@ -356,7 +356,8 @@ func TestInverse(t *testing.T) {
 		assert.Equal(t, float64(105), m.Cofactor(3, 2))
 		assert.True(t, util.Approx(inverse.At(2, 3), m.Cofactor(3, 2)/determinant))
 
-		result := m.Inverse()
+		result, err := m.Inverse()
+		assert.Nil(t, err)
 		for i := 0; i < m.rows; i++ {
 			for j := 0; j < m.cols; j++ {
 				assert.True(t, util.Approx(inverse.At(i, j), result.At(i, j)))
@@ -380,7 +381,10 @@ func TestInverse(t *testing.T) {
 		})
 
 		c := a.MultiplyMatrix(b)
-		result := c.MultiplyMatrix(b.Inverse())
+		inverse, err := b.Inverse()
+		assert.Nil(t, err)
+
+		result := c.MultiplyMatrix(inverse)
 		for i := 0; i < result.rows; i++ {
 			for j := 0; j < result.cols; j++ {
 				assert.True(t, util.Approx(a.At(i, j), result.At(i, j)))
