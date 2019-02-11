@@ -246,3 +246,17 @@ func TestDeterminant(t *testing.T) {
 		assert.Equal(t, float64(17), m.Determinant())
 	})
 }
+
+func TestMinor(t *testing.T) {
+	t.Run("Calulating the minor of a 3x3 matrix", func(t *testing.T) {
+		m := New(3, 3, []float64{
+			3, 5, 0,
+			2, -1, -7,
+			6, -1, 5,
+		})
+
+		submatrix := m.Submatrix(1, 0)
+		assert.Equal(t, float64(25), submatrix.Determinant())
+		assert.Equal(t, float64(25), m.Minor(1, 0))
+	})
+}

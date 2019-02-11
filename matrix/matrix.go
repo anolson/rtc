@@ -150,9 +150,9 @@ func (m *Matrix) Submatrix(i, j int) *Matrix {
 	return New(m.rows-1, m.cols-1, result)
 }
 
-func (m *Matrix) Minor(i, j int) *Matrix {
-	return New(0, 0, nil)
-
+// Minor caclulates the minor of a matrix at row, col
+func (m *Matrix) Minor(i, j int) float64 {
+	return m.Submatrix(i, j).Determinant()
 }
 
 func (m *Matrix) Cofactor(i, j int) *Matrix {
