@@ -166,8 +166,18 @@ func (m *Matrix) Cofactor(i, j int) float64 {
 	return minor
 }
 
+// Determinant caclulates the determinant of a matrix
 func (m *Matrix) Determinant() float64 {
-	return m.data[0]*m.data[3] - m.data[1]*m.data[2]
+	if m.rows == 2 && m.cols == 2 {
+		return m.data[0]*m.data[3] - m.data[1]*m.data[2]
+	}
+
+	var result float64
+	for j, element := range m.Row(0) {
+		result = result + (m.Cofactor(0, j) * element)
+	}
+
+	return result
 }
 
 func (m *Matrix) Inverse() *Matrix {

@@ -237,13 +237,41 @@ func TestSubmatrix(t *testing.T) {
 }
 
 func TestDeterminant(t *testing.T) {
-	t.Run("Calulating the determinant of a 2x2 matrix", func(t *testing.T) {
+	t.Run("Calculating the determinant of a 2x2 matrix", func(t *testing.T) {
 		m := New(2, 2, []float64{
 			1, 5,
 			-3, 2,
 		})
 
 		assert.Equal(t, float64(17), m.Determinant())
+	})
+
+	t.Run("Calculating the determinant of a 3x3 matrix", func(t *testing.T) {
+		m := New(3, 3, []float64{
+			1, 2, 6,
+			-5, 8, -4,
+			2, 6, 4,
+		})
+
+		assert.Equal(t, float64(56), m.Cofactor(0, 0))
+		assert.Equal(t, float64(12), m.Cofactor(0, 1))
+		assert.Equal(t, float64(-46), m.Cofactor(0, 2))
+		assert.Equal(t, float64(-196), m.Determinant())
+	})
+
+	t.Run("Calculating the determinant of a 4x4 matrix", func(t *testing.T) {
+		m := New(4, 4, []float64{
+			-2, -8, 3, 5,
+			-3, 1, 7, 3,
+			1, 2, -9, 6,
+			-6, 7, 7, -9,
+		})
+
+		assert.Equal(t, float64(690), m.Cofactor(0, 0))
+		assert.Equal(t, float64(447), m.Cofactor(0, 1))
+		assert.Equal(t, float64(210), m.Cofactor(0, 2))
+		assert.Equal(t, float64(51), m.Cofactor(0, 3))
+		assert.Equal(t, float64(-4071), m.Determinant())
 	})
 }
 
