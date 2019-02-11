@@ -303,3 +303,29 @@ func TestCofactor(t *testing.T) {
 		assert.Equal(t, float64(-25), m.Cofactor(1, 0))
 	})
 }
+
+func TestIsInvertible(t *testing.T) {
+	t.Run("Testing an intvertible matrix for invertibility", func(t *testing.T) {
+		m := New(4, 4, []float64{
+			6, 4, 4, 4,
+			5, 5, 7, 6,
+			4, -9, 3, -7,
+			9, 1, 7, -6,
+		})
+
+		assert.Equal(t, float64(-2120), m.Determinant())
+		assert.True(t, m.IsInvertible())
+	})
+
+	t.Run("Testing a non-intvertible matrix for invertibility", func(t *testing.T) {
+		m := New(4, 4, []float64{
+			-4, 2, -2, -3,
+			9, 6, 2, 6,
+			0, -5, 1, -5,
+			0, 0, 0, 0,
+		})
+
+		assert.Equal(t, float64(0), m.Determinant())
+		assert.False(t, m.IsInvertible())
+	})
+}
