@@ -390,6 +390,5 @@ func TestInverse(t *testing.T) {
 				assert.True(t, util.Approx(a.At(i, j), result.At(i, j)))
 			}
 		}
-
 	})
 }
