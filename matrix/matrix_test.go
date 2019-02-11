@@ -236,7 +236,7 @@ func TestSubmatrix(t *testing.T) {
 	})
 }
 
-func TestDterminant(t *testing.T) {
+func TestDeterminant(t *testing.T) {
 	t.Run("Calulating the determinant of a 2x2 matrix", func(t *testing.T) {
 		m := New(2, 2, []float64{
 			1, 5,
