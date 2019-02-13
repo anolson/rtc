@@ -1,8 +1,8 @@
 package matrix
 
 // Inverse caclulates the inverse of a matrix
-func (m *Matrix) Inverse() (*Matrix, error) {
-	determinant := m.Determinant()
+func Inverse(m *Matrix) (*Matrix, error) {
+	determinant := Determinant(m)
 
 	if determinant == 0 {
 		return nil, ErrNotInvertible
@@ -12,7 +12,7 @@ func (m *Matrix) Inverse() (*Matrix, error) {
 
 	for i := 0; i < m.rows; i++ {
 		for j := 0; j < m.cols; j++ {
-			cofactor := m.Cofactor(i, j)
+			cofactor := Cofactor(m, i, j)
 			result.Set(j, i, (cofactor / determinant))
 		}
 	}
@@ -21,22 +21,22 @@ func (m *Matrix) Inverse() (*Matrix, error) {
 }
 
 // Determinant caclulates the determinant of a matrix
-func (m *Matrix) Determinant() float64 {
+func Determinant(m *Matrix) float64 {
 	if m.rows == 2 && m.cols == 2 {
 		return m.data[0]*m.data[3] - m.data[1]*m.data[2]
 	}
 
 	var result float64
 	for j, element := range m.Row(0) {
-		result = result + (m.Cofactor(0, j) * element)
+		result = result + (Cofactor(m, 0, j) * element)
 	}
 
 	return result
 }
 
 // Cofactor caclulates the cofactor of a matrix at row, col
-func (m *Matrix) Cofactor(i, j int) float64 {
-	minor := m.Minor(i, j)
+func Cofactor(m *Matrix, i, j int) float64 {
+	minor := Minor(m, i, j)
 
 	if ((i + j) % 2) != 0 {
 		return -minor
@@ -46,12 +46,12 @@ func (m *Matrix) Cofactor(i, j int) float64 {
 }
 
 // Minor caclulates the minor of a matrix at row, col
-func (m *Matrix) Minor(i, j int) float64 {
-	return m.Submatrix(i, j).Determinant()
+func Minor(m *Matrix, i, j int) float64 {
+	return Determinant(Submatrix(m, i, j))
 }
 
 // Submatrix returns the submatrix by removing the provided row, col
-func (m *Matrix) Submatrix(i, j int) *Matrix {
+func Submatrix(m *Matrix, i, j int) *Matrix {
 	result := []float64{}
 
 	for k := 0; k < m.rows; k++ {

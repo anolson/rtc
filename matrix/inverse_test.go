@@ -23,16 +23,16 @@ func TestInverse(t *testing.T) {
 			-0.52256, -0.81391, -0.30075, 0.30639,
 		})
 
-		determinant := m.Determinant()
+		determinant := Determinant(m)
 		assert.Equal(t, float64(532), determinant)
 
-		assert.Equal(t, float64(-160), m.Cofactor(2, 3))
-		assert.True(t, util.Approx(inverse.At(3, 2), m.Cofactor(2, 3)/determinant))
+		assert.Equal(t, float64(-160), Cofactor(m, 2, 3))
+		assert.True(t, util.Approx(inverse.At(3, 2), Cofactor(m, 2, 3)/determinant))
 
-		assert.Equal(t, float64(105), m.Cofactor(3, 2))
-		assert.True(t, util.Approx(inverse.At(2, 3), m.Cofactor(3, 2)/determinant))
+		assert.Equal(t, float64(105), Cofactor(m, 3, 2))
+		assert.True(t, util.Approx(inverse.At(2, 3), Cofactor(m, 3, 2)/determinant))
 
-		result, err := m.Inverse()
+		result, err := Inverse(m)
 		assert.Nil(t, err)
 		assert.True(t, inverse.Equal(result))
 	})
@@ -53,7 +53,7 @@ func TestInverse(t *testing.T) {
 		})
 
 		c := Multiply(a, b)
-		inverse, err := b.Inverse()
+		inverse, err := Inverse(b)
 		assert.Nil(t, err)
 
 		result := Multiply(c, inverse)
@@ -68,7 +68,7 @@ func TestDeterminant(t *testing.T) {
 			-3, 2,
 		})
 
-		assert.Equal(t, float64(17), m.Determinant())
+		assert.Equal(t, float64(17), Determinant(m))
 	})
 
 	t.Run("Calculating the determinant of a 3x3 matrix", func(t *testing.T) {
@@ -78,10 +78,10 @@ func TestDeterminant(t *testing.T) {
 			2, 6, 4,
 		})
 
-		assert.Equal(t, float64(56), m.Cofactor(0, 0))
-		assert.Equal(t, float64(12), m.Cofactor(0, 1))
-		assert.Equal(t, float64(-46), m.Cofactor(0, 2))
-		assert.Equal(t, float64(-196), m.Determinant())
+		assert.Equal(t, float64(56), Cofactor(m, 0, 0))
+		assert.Equal(t, float64(12), Cofactor(m, 0, 1))
+		assert.Equal(t, float64(-46), Cofactor(m, 0, 2))
+		assert.Equal(t, float64(-196), Determinant(m))
 	})
 
 	t.Run("Calculating the determinant of a 4x4 matrix", func(t *testing.T) {
@@ -92,11 +92,11 @@ func TestDeterminant(t *testing.T) {
 			-6, 7, 7, -9,
 		})
 
-		assert.Equal(t, float64(690), m.Cofactor(0, 0))
-		assert.Equal(t, float64(447), m.Cofactor(0, 1))
-		assert.Equal(t, float64(210), m.Cofactor(0, 2))
-		assert.Equal(t, float64(51), m.Cofactor(0, 3))
-		assert.Equal(t, float64(-4071), m.Determinant())
+		assert.Equal(t, float64(690), Cofactor(m, 0, 0))
+		assert.Equal(t, float64(447), Cofactor(m, 0, 1))
+		assert.Equal(t, float64(210), Cofactor(m, 0, 2))
+		assert.Equal(t, float64(51), Cofactor(m, 0, 3))
+		assert.Equal(t, float64(-4071), Determinant(m))
 	})
 }
 
@@ -108,9 +108,9 @@ func TestMinor(t *testing.T) {
 			6, -1, 5,
 		})
 
-		submatrix := m.Submatrix(1, 0)
-		assert.Equal(t, float64(25), submatrix.Determinant())
-		assert.Equal(t, float64(25), m.Minor(1, 0))
+		submatrix := Submatrix(m, 1, 0)
+		assert.Equal(t, float64(25), Determinant(submatrix))
+		assert.Equal(t, float64(25), Minor(m, 1, 0))
 	})
 }
 
@@ -122,10 +122,10 @@ func TestCofactor(t *testing.T) {
 			6, -1, 5,
 		})
 
-		assert.Equal(t, float64(-12), m.Minor(0, 0))
-		assert.Equal(t, float64(-12), m.Cofactor(0, 0))
-		assert.Equal(t, float64(25), m.Minor(1, 0))
-		assert.Equal(t, float64(-25), m.Cofactor(1, 0))
+		assert.Equal(t, float64(-12), Minor(m, 0, 0))
+		assert.Equal(t, float64(-12), Cofactor(m, 0, 0))
+		assert.Equal(t, float64(25), Minor(m, 1, 0))
+		assert.Equal(t, float64(-25), Cofactor(m, 1, 0))
 	})
 }
 
@@ -142,7 +142,7 @@ func TestSubmatrix(t *testing.T) {
 			0, 6,
 		})
 
-		assert.Equal(t, result, m.Submatrix(0, 2))
+		assert.Equal(t, result, Submatrix(m, 0, 2))
 	})
 
 	t.Run("A submatrix of a 4x4 matrix is a 3x3 matrix", func(t *testing.T) {
@@ -159,6 +159,6 @@ func TestSubmatrix(t *testing.T) {
 			-7, -1, 1,
 		})
 
-		assert.Equal(t, result, m.Submatrix(2, 1))
+		assert.Equal(t, result, Submatrix(m, 2, 1))
 	})
 }
