@@ -8,7 +8,7 @@ import (
 )
 
 func TestInverse(t *testing.T) {
-	t.Run("Calculate the inverse of a matrix", func(t *testing.T) {
+	t.Run("Calculating the inverse of a matrix", func(t *testing.T) {
 		m := New(4, 4, []float64{
 			-5, 2, 6, -8,
 			1, -5, 1, 8,
@@ -101,7 +101,7 @@ func TestDeterminant(t *testing.T) {
 }
 
 func TestMinor(t *testing.T) {
-	t.Run("Calulating the minor of a 3x3 matrix", func(t *testing.T) {
+	t.Run("Calculating the minor of a 3x3 matrix", func(t *testing.T) {
 		m := New(3, 3, []float64{
 			3, 5, 0,
 			2, -1, -7,
@@ -115,7 +115,7 @@ func TestMinor(t *testing.T) {
 }
 
 func TestCofactor(t *testing.T) {
-	t.Run("Calulating the cofactor of a 3x3 matrix", func(t *testing.T) {
+	t.Run("Caclulating the cofactor of a 3x3 matrix", func(t *testing.T) {
 		m := New(3, 3, []float64{
 			3, 5, 0,
 			2, -1, -7,
