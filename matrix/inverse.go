@@ -1,5 +1,11 @@
 package matrix
 
+import "errors"
+
+var (
+	ErrNotInvertible = errors.New("Not Invertible")
+)
+
 // Inverse caclulates the inverse of a matrix
 func Inverse(m *Matrix) (*Matrix, error) {
 	determinant := Determinant(m)

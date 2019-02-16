@@ -1,13 +1,7 @@
 package matrix
 
 import (
-	"errors"
-
 	"github.com/anolson/rtc/util"
-)
-
-var (
-	ErrNotInvertible = errors.New("Not Invertible")
 )
 
 // Matrix is a data structure for storing a grid of numbers
