@@ -31,3 +31,28 @@ func TestTranslationMatrix(t *testing.T) {
 		assert.Equal(t, v, MultiplyByTuple(transform, v))
 	})
 }
+
+func TestScalingMatrix(t *testing.T) {
+	t.Run("Applying a scaling matrix to a point", func(t *testing.T) {
+		transform := Scaling(2, 3, 4)
+		p := tuple.Point(-4, 6, 8)
+
+		assert.Equal(t, tuple.Point(-8, 18, 32), MultiplyByTuple(transform, p))
+	})
+
+	t.Run("Applying by a scaling matrix to a vector", func(t *testing.T) {
+		transform := Scaling(2, 3, 4)
+		v := tuple.Vector(-4, 6, 8)
+
+		assert.Equal(t, tuple.Vector(-8, 18, 32), MultiplyByTuple(transform, v))
+	})
+
+	t.Run("Applying the inverse of a scaling matrix", func(t *testing.T) {
+		transform := Scaling(2, 3, 4)
+		inverse, err := Inverse(transform)
+		assert.Nil(t, err)
+		v := tuple.Vector(-4, 6, 8)
+
+		assert.Equal(t, tuple.Vector(-2, 2, 2), MultiplyByTuple(inverse, v))
+	})
+}

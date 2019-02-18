@@ -9,3 +9,13 @@ func Translation(x, y, z float64) *Matrix {
 		0, 0, 0, 1,
 	})
 }
+
+// Scaling returns a matrix for scaling a vector or point
+func Scaling(x, y, z float64) *Matrix {
+	return New(4, 4, []float64{
+		x, 0, 0, 0,
+		0, y, 0, 0,
+		0, 0, z, 0,
+		0, 0, 0, 1,
+	})
+}
