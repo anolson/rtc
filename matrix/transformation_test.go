@@ -1,6 +1,7 @@
 package matrix
 
 import (
+	"math"
 	"testing"
 
 	"github.com/anolson/rtc/tuple"
@@ -61,5 +62,16 @@ func TestScaling(t *testing.T) {
 		p := tuple.Point(2, 3, 4)
 
 		assert.Equal(t, tuple.Point(-2, 3, 4), MultiplyByTuple(transform, p))
+	})
+}
+
+func TestRotation(t *testing.T) {
+	t.Run("Rotating a point around the x axis", func(t *testing.T) {
+		halfQuarter := RotationX(math.Pi / 4)
+		fullQuarter := RotationX(math.Pi / 2)
+		p := tuple.Point(0, 1, 0)
+
+		assert.True(t, tuple.Point(0, math.Sqrt(2)/2, math.Sqrt(2)/2).Equal(MultiplyByTuple(halfQuarter, p)))
+		assert.True(t, tuple.Point(0, 0, 1).Equal(MultiplyByTuple(fullQuarter, p)))
 	})
 }
