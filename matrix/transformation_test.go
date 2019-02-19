@@ -55,4 +55,11 @@ func TestScaling(t *testing.T) {
 
 		assert.Equal(t, tuple.Vector(-2, 2, 2), MultiplyByTuple(inverse, v))
 	})
+
+	t.Run("Reflection is scaling by a negative value", func(t *testing.T) {
+		transform := Scaling(-1, 1, 1)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(-2, 3, 4), MultiplyByTuple(transform, p))
+	})
 }
