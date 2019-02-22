@@ -2,7 +2,7 @@ package matrix
 
 import "math"
 
-// Translation returns a matrix for moving a point
+// Translation returns a Matrix for moving a point
 func Translation(x, y, z float64) *Matrix {
 	return New(4, 4, []float64{
 		1, 0, 0, x,
@@ -12,7 +12,7 @@ func Translation(x, y, z float64) *Matrix {
 	})
 }
 
-// Scaling returns a matrix for scaling a vector or point
+// Scaling returns a Matrix for scaling a vector or point
 func Scaling(x, y, z float64) *Matrix {
 	return New(4, 4, []float64{
 		x, 0, 0, 0,
@@ -22,6 +22,7 @@ func Scaling(x, y, z float64) *Matrix {
 	})
 }
 
+// RotationX returns a Matrix for rotating a point around the x axis
 func RotationX(radians float64) *Matrix {
 	cos := math.Cos(radians)
 	sin := math.Sin(radians)
