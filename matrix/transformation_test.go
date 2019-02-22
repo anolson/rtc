@@ -74,4 +74,13 @@ func TestRotation(t *testing.T) {
 		assert.True(t, tuple.Point(0, math.Sqrt(2)/2, math.Sqrt(2)/2).Equal(MultiplyByTuple(halfQuarter, p)))
 		assert.True(t, tuple.Point(0, 0, 1).Equal(MultiplyByTuple(fullQuarter, p)))
 	})
+
+	t.Run("Rotating a point around the x axis - in the opposite direction", func(t *testing.T) {
+		halfQuarter := RotationX(math.Pi / 4)
+		inverse, err := Inverse(halfQuarter)
+		assert.Nil(t, err)
+		p := tuple.Point(0, 1, 0)
+
+		assert.True(t, tuple.Point(0, math.Sqrt(2)/2, -math.Sqrt(2)/2).Equal(MultiplyByTuple(inverse, p)))
+	})
 }
