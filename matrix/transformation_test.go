@@ -65,7 +65,7 @@ func TestScaling(t *testing.T) {
 	})
 }
 
-func TestRotation(t *testing.T) {
+func TestRotationX(t *testing.T) {
 	t.Run("Rotating a point around the x axis", func(t *testing.T) {
 		halfQuarter := RotationX(math.Pi / 4)
 		fullQuarter := RotationX(math.Pi / 2)
@@ -82,5 +82,25 @@ func TestRotation(t *testing.T) {
 		p := tuple.Point(0, 1, 0)
 
 		assert.True(t, tuple.Point(0, math.Sqrt(2)/2, -math.Sqrt(2)/2).Equal(MultiplyByTuple(inverse, p)))
+	})
+}
+
+func TestRotationY(t *testing.T) {
+	t.Run("Rotating a point around the y axis", func(t *testing.T) {
+		halfQuarter := RotationY(math.Pi / 4)
+		fullQuarter := RotationY(math.Pi / 2)
+		p := tuple.Point(0, 0, 1)
+
+		assert.True(t, tuple.Point(math.Sqrt(2)/2, 0, math.Sqrt(2)/2).Equal(MultiplyByTuple(halfQuarter, p)))
+		assert.True(t, tuple.Point(1, 0, 0).Equal(MultiplyByTuple(fullQuarter, p)))
+	})
+
+	t.Run("Rotating a point around the y axis - in the opposite direction", func(t *testing.T) {
+		halfQuarter := RotationY(math.Pi / 4)
+		inverse, err := Inverse(halfQuarter)
+		assert.Nil(t, err)
+		p := tuple.Point(0, 0, 1)
+
+		assert.True(t, tuple.Point(-math.Sqrt(2)/2, 0, math.Sqrt(2)/2).Equal(MultiplyByTuple(inverse, p)))
 	})
 }
