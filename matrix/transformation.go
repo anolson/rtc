@@ -1,6 +1,15 @@
 package matrix
 
-import "math"
+import (
+	"math"
+
+	"github.com/anolson/rtc/tuple"
+)
+
+// Transform returns the result of applying a transformation to a Tuple
+func Transform(m *Matrix, t *tuple.Tuple) *tuple.Tuple {
+	return MultiplyByTuple(m, t)
+}
 
 // Translation returns a Matrix for moving a point
 func Translation(x, y, z float64) *Matrix {
