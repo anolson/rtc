@@ -47,3 +47,16 @@ func RotationY(radians float64) *Matrix {
 		0, 0, 0, 1,
 	})
 }
+
+// RotationZ returns a Matrix for rotating a point around the z axis
+func RotationZ(radians float64) *Matrix {
+	cos := math.Cos(radians)
+	sin := math.Sin(radians)
+
+	return New(4, 4, []float64{
+		cos, -sin, 0, 0,
+		sin, cos, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	})
+}
