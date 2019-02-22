@@ -168,3 +168,31 @@ func TestShearing(t *testing.T) {
 		assert.Equal(t, tuple.Point(2, 3, 7), Transform(transform, p))
 	})
 }
+
+func TestChainingTransformations(t *testing.T) {
+	t.Run("Individual transformations are applied in sequence", func(t *testing.T) {
+		p := tuple.Point(1, 0, 1)
+		a := RotationX(math.Pi / 2)
+		b := Scaling(5, 5, 5)
+		c := Translation(10, 5, 7)
+
+		p2 := Transform(a, p)
+		assert.True(t, tuple.Point(1, -1, 0).Equal(p2))
+
+		p3 := Transform(b, p2)
+		assert.True(t, tuple.Point(5, -5, 0).Equal(p3))
+
+		p4 := Transform(c, p3)
+		assert.True(t, tuple.Point(15, 0, 7).Equal(p4))
+	})
+
+	t.Run("Chained transformations must be applied in reverse order", func(t *testing.T) {
+		p := tuple.Point(1, 0, 1)
+		a := RotationX(math.Pi / 2)
+		b := Scaling(5, 5, 5)
+		c := Translation(10, 5, 7)
+
+		p2 := Chain(p, a, b, c)
+		assert.True(t, tuple.Point(15, 0, 7).Equal(p2))
+	})
+}

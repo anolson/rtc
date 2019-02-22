@@ -11,6 +11,16 @@ func Transform(m *Matrix, t *tuple.Tuple) *tuple.Tuple {
 	return MultiplyByTuple(m, t)
 }
 
+// Chain returns the result of applying a multiple transformations to a Tuple
+func Chain(t *tuple.Tuple, transforms ...*Matrix) *tuple.Tuple {
+	transformed := t
+	for _, transform := range transforms {
+		transformed = Transform(transform, transformed)
+	}
+
+	return transformed
+}
+
 // Translation returns a Matrix for moving a point
 func Translation(x, y, z float64) *Matrix {
 	return New(4, 4, []float64{
