@@ -124,3 +124,47 @@ func TestRotationZ(t *testing.T) {
 		assert.True(t, tuple.Point(math.Sqrt(2)/2, math.Sqrt(2)/2, 0).Equal(Transform(inverse, p)))
 	})
 }
+
+func TestShearing(t *testing.T) {
+	t.Run("A shearing transformation moves x in proportion to y", func(t *testing.T) {
+		transform := Shearing(1, 0, 0, 0, 0, 0)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(5, 3, 4), Transform(transform, p))
+	})
+
+	t.Run("A shearing transformation moves x in proportion to z", func(t *testing.T) {
+		transform := Shearing(0, 1, 0, 0, 0, 0)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(6, 3, 4), Transform(transform, p))
+	})
+
+	t.Run("A shearing transformation moves y in proportion to x", func(t *testing.T) {
+		transform := Shearing(0, 0, 1, 0, 0, 0)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(2, 5, 4), Transform(transform, p))
+	})
+
+	t.Run("A shearing transformation moves y in proportion to z", func(t *testing.T) {
+		transform := Shearing(0, 0, 0, 1, 0, 0)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(2, 7, 4), Transform(transform, p))
+	})
+
+	t.Run("A shearing transformation moves z in proportion to x", func(t *testing.T) {
+		transform := Shearing(0, 0, 0, 0, 1, 0)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(2, 3, 6), Transform(transform, p))
+	})
+
+	t.Run("A shearing transformation moves z in proportion to y", func(t *testing.T) {
+		transform := Shearing(0, 0, 0, 0, 0, 1)
+		p := tuple.Point(2, 3, 4)
+
+		assert.Equal(t, tuple.Point(2, 3, 7), Transform(transform, p))
+	})
+}
