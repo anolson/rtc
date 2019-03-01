@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/anolson/rtc/util"
-	"github.com/stvp/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsPoint(t *testing.T) {

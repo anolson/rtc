@@ -3,7 +3,7 @@ package matrix
 import (
 	"testing"
 
-	"github.com/stvp/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {

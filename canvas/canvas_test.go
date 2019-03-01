@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/anolson/rtc/color"
-	"github.com/stvp/assert"
+	"github.com/stretchr/testify/assert"
 	"gotest.tools/golden"
 )
 
