@@ -1,6 +1,10 @@
 package tuple
 
-import "math"
+import (
+	"math"
+
+	"github.com/anolson/rtc/util"
+)
 
 const (
 	pointType  = float64(1)
@@ -31,6 +35,14 @@ func (t *Tuple) isPoint() bool {
 
 func (t *Tuple) isVector() bool {
 	return t.W == vectorType
+}
+
+// Equal returns true if a Tuple is equal to another, otherwise false
+func (t *Tuple) Equal(other *Tuple) bool {
+	return util.Approx(t.X, other.X) &&
+		util.Approx(t.Y, other.Y) &&
+		util.Approx(t.Z, other.Z) &&
+		util.Approx(t.W, other.W)
 }
 
 // Add a Tuple to another one
