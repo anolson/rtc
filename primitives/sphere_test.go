@@ -3,10 +3,26 @@ package primitives
 import (
 	"testing"
 
+	"github.com/anolson/rtc/matrix"
 	"github.com/anolson/rtc/ray"
 	"github.com/anolson/rtc/tuple"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestNewSphere(t *testing.T) {
+	s := NewSphere()
+
+	assert.Equal(t, matrix.Identity(), s.Transform)
+}
+
+func TestSetTransformSphere(t *testing.T) {
+	s := NewSphere()
+	transform := matrix.Translation(2, 3, 4)
+
+	s.SetTransform(transform)
+
+	assert.Equal(t, transform, s.Transform)
+}
 
 func TestIntersection(t *testing.T) {
 	t.Run("A ray intsects a sphere at two points", func(t *testing.T) {

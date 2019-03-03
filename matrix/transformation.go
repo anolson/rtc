@@ -21,6 +21,16 @@ func Chain(t *tuple.Tuple, transforms ...*Matrix) *tuple.Tuple {
 	return transformed
 }
 
+// Identity returns the identiry Matrix
+func Identity() *Matrix {
+	return New(4, 4, []float64{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	})
+}
+
 // Translation returns a Matrix for moving a point
 func Translation(x, y, z float64) *Matrix {
 	return New(4, 4, []float64{

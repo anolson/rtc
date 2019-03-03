@@ -3,16 +3,26 @@ package primitives
 import (
 	"math"
 
+	"github.com/anolson/rtc/matrix"
 	"github.com/anolson/rtc/ray"
 	"github.com/anolson/rtc/tuple"
 )
 
 // Sphere represents a 3D Spherical shape
-type Sphere struct{}
+type Sphere struct {
+	Transform *matrix.Matrix
+}
 
 // NewSphere returns a new Sphere object
 func NewSphere() *Sphere {
-	return &Sphere{}
+	return &Sphere{
+		Transform: matrix.Identity(),
+	}
+}
+
+// SetTransform sets the Transform on a Sphere
+func (s *Sphere) SetTransform(transform *matrix.Matrix) {
+	s.Transform = transform
 }
 
 // Intersect returns the intersection of a ray through sphere
