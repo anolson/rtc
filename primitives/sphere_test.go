@@ -170,4 +170,23 @@ func TestNormalAt(t *testing.T) {
 		n := s.NormalAt(p)
 		assert.Equal(t, n.Normalize(), n)
 	})
+
+	t.Run("The normal on a translated sphere", func(t *testing.T) {
+		s := NewSphere()
+		s.SetTransform(matrix.Translation(0, 1, 0))
+		p := tuple.Point(0, 1.70711, -0.70711)
+
+		n := s.NormalAt(p)
+		assert.True(t, tuple.Vector(0, 0.70711, -0.70711).Equal(n))
+	})
+
+	t.Run("The normal on a transformed sphere", func(t *testing.T) {
+		s := NewSphere()
+		transform := matrix.Multiply(matrix.Scaling(1, 0.5, 1), matrix.RotationZ(math.Pi/5))
+		s.SetTransform(transform)
+		p := tuple.Point(0, math.Sqrt(2)/2, -math.Sqrt(2)/2)
+
+		n := s.NormalAt(p)
+		assert.True(t, tuple.Vector(0, 0.97014, -0.24254).Equal(n))
+	})
 }

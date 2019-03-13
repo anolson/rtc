@@ -52,8 +52,15 @@ func (s *Sphere) Intersect(r *ray.Ray) []*Intersection {
 }
 
 // NormalAt returns the normal of a sphere at a point
-func (s *Sphere) NormalAt(point *tuple.Tuple) *tuple.Tuple {
+func (s *Sphere) NormalAt(worldPoint *tuple.Tuple) *tuple.Tuple {
 	origin := tuple.Point(0, 0, 0)
+	inverseTransform, _ := matrix.Inverse(s.Transform)
+	objectPoint := matrix.MultiplyByTuple(inverseTransform, worldPoint)
+	objectNormal := tuple.Subtract(objectPoint, origin)
 
-	return tuple.Subtract(point, origin).Normalize()
+	transposed := matrix.Transpose(inverseTransform)
+	worldNormal := matrix.MultiplyByTuple(transposed, objectNormal)
+	worldNormal.W = 0
+
+	return worldNormal.Normalize()
 }
