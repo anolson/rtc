@@ -17,5 +17,5 @@ $ make test
 
 Run all tests when any `.go` file is changed:
 ```
-$ make test
+$ make watch
 ```
