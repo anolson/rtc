@@ -25,7 +25,7 @@ func (s *Sphere) SetTransform(transform *matrix.Matrix) {
 	s.Transform = transform
 }
 
-// Intersect returns the intersection of a ray through sphere
+// Intersect returns the intersection of a ray through a sphere
 func (s *Sphere) Intersect(r *ray.Ray) []*Intersection {
 	inverseTransform, _ := matrix.Inverse(s.Transform)
 	r2 := r.Transform(inverseTransform)
@@ -49,4 +49,11 @@ func (s *Sphere) Intersect(r *ray.Ray) []*Intersection {
 		NewIntersection(t1, s),
 		NewIntersection(t2, s),
 	}
+}
+
+// NormalAt returns the normal of a sphere at a point
+func (s *Sphere) NormalAt(point *tuple.Tuple) *tuple.Tuple {
+	origin := tuple.Point(0, 0, 0)
+
+	return tuple.Subtract(point, origin).Normalize()
 }

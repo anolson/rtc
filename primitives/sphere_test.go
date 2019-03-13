@@ -1,6 +1,7 @@
 package primitives
 
 import (
+	"math"
 	"testing"
 
 	"github.com/anolson/rtc/matrix"
@@ -126,5 +127,47 @@ func TestIntersection(t *testing.T) {
 
 		assert.Equal(t, 0, len(intersection))
 	})
+}
 
+func TestNormalAt(t *testing.T) {
+	t.Run("The normal on a sphere at a point on the x axis", func(t *testing.T) {
+		s := NewSphere()
+		p := tuple.Point(1, 0, 0)
+
+		n := s.NormalAt(p)
+		assert.Equal(t, tuple.Vector(1, 0, 0), n)
+	})
+
+	t.Run("The normal on a sphere at a point on the y axis", func(t *testing.T) {
+		s := NewSphere()
+		p := tuple.Point(0, 1, 0)
+
+		n := s.NormalAt(p)
+		assert.Equal(t, tuple.Vector(0, 1, 0), n)
+
+	})
+
+	t.Run("The normal on a sphere at a point on the z axis", func(t *testing.T) {
+		s := NewSphere()
+		p := tuple.Point(0, 0, 1)
+
+		n := s.NormalAt(p)
+		assert.Equal(t, tuple.Vector(0, 0, 1), n)
+	})
+
+	t.Run("The normal on a sphere at a nonaxial point", func(t *testing.T) {
+		s := NewSphere()
+		p := tuple.Point(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3)
+
+		n := s.NormalAt(p)
+		assert.Equal(t, tuple.Vector(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3), n)
+	})
+
+	t.Run("The normal is a normalized vector", func(t *testing.T) {
+		s := NewSphere()
+		p := tuple.Point(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3)
+
+		n := s.NormalAt(p)
+		assert.Equal(t, n.Normalize(), n)
+	})
 }
