@@ -2,7 +2,7 @@ package matrix
 
 import "github.com/anolson/rtc/tuple"
 
-// MultiplyByMatrix multiplies two matrices together
+// Multiply multiplies two matrices together
 func Multiply(m, other *Matrix) *Matrix {
 	result := New(m.rows, m.cols, nil)
 

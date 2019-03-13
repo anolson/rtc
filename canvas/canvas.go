@@ -61,7 +61,7 @@ func (c *Canvas) PixelAt(x, y int) (*color.Color, error) {
 	return c.Pixels[y][x], nil
 }
 
-// Save saves the canvs to disk
+// Save writes the canvas to a writer
 func (c *Canvas) Save(w io.Writer) {
 	fmt.Fprintf(w, "P3\n")
 	fmt.Fprintf(w, "%v %v\n", c.Width, c.Height)
