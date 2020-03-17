@@ -10,12 +10,14 @@ import (
 
 // Sphere represents a 3D Spherical shape
 type Sphere struct {
+	Material  *Material
 	Transform *matrix.Matrix
 }
 
 // NewSphere returns a new Sphere object
 func NewSphere() *Sphere {
 	return &Sphere{
+		Material:  DefaultMaterial(),
 		Transform: matrix.Identity(),
 	}
 }

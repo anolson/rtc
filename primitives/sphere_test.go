@@ -190,3 +190,22 @@ func TestNormalAt(t *testing.T) {
 		assert.True(t, tuple.Vector(0, 0.97014, -0.24254).Equal(n))
 	})
 }
+
+func TestMaterial(t *testing.T) {
+	t.Run("A sphere has a default material", func(t *testing.T) {
+		s := NewSphere()
+		m := DefaultMaterial()
+
+		assert.Equal(t, m, s.Material)
+	})
+
+	t.Run("A sphere may be assigned a material", func(t *testing.T) {
+		s := NewSphere()
+		m := DefaultMaterial()
+		m.Ambient = 1.0
+
+		s.Material = m
+
+		assert.Equal(t, m, s.Material)
+	})
+}
