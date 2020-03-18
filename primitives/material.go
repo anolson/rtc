@@ -1,6 +1,12 @@
 package primitives
 
-import "github.com/anolson/rtc/color"
+import (
+	"math"
+
+	"github.com/anolson/rtc/color"
+	"github.com/anolson/rtc/light"
+	"github.com/anolson/rtc/tuple"
+)
 
 const (
 	defaultAmbient   = 0.1
@@ -27,4 +33,40 @@ func DefaultMaterial() *Material {
 		Specular:  defaultSpecular,
 		Shininess: defaultShininess,
 	}
+}
+
+// Lighting shades an objects so it appears three-dimensional
+func (m *Material) Lighting(
+	light *light.Light,
+	point *tuple.Tuple,
+	eyev *tuple.Tuple,
+	normalv *tuple.Tuple,
+) *color.Color {
+
+	effectiveColor := color.HadamardProduct(m.Color, light.Intensity)
+	lightv := tuple.Subtract(light.Position, point).Normalize()
+	ambient := color.Multiply(effectiveColor, m.Ambient)
+	black := color.RGB(0, 0, 0)
+
+	var diffuse, specular *color.Color
+
+	lightDotNormal := tuple.Dot(lightv, normalv)
+	if lightDotNormal < 0 {
+		diffuse = black
+		specular = black
+	} else {
+		diffuse = color.Multiply(effectiveColor, (m.Diffuse * lightDotNormal))
+
+		reflectv := tuple.Reflect(tuple.Negate(lightv), normalv)
+		reflectDotEye := tuple.Dot(reflectv, eyev)
+
+		if reflectDotEye <= 0 {
+			specular = black
+		} else {
+			factor := math.Pow(reflectDotEye, m.Shininess)
+			specular = color.Multiply(light.Intensity, (m.Specular * factor))
+		}
+	}
+
+	return color.Add(ambient, color.Add(diffuse, specular))
 }
