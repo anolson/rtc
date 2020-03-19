@@ -29,7 +29,7 @@ func TestLighting(t *testing.T) {
 	t.Run("Lighting with the eye between the light and the surface", func(t *testing.T) {
 		eyev := tuple.Vector(0, 0, -1)
 		normalv := tuple.Vector(0, 0, -1)
-		light := light.NewPoint(tuple.Point(0, 0, -10), color.RGB(1, 1, 1))
+		light := light.NewPointLight(tuple.Point(0, 0, -10), color.RGB(1, 1, 1))
 
 		result := m.Lighting(light, position, eyev, normalv)
 
@@ -39,7 +39,7 @@ func TestLighting(t *testing.T) {
 	t.Run("Lighting with the eye between light and surface, eye offset 45°", func(t *testing.T) {
 		eyev := tuple.Vector(0, math.Sqrt(2)/2, -math.Sqrt(2)/2)
 		normalv := tuple.Vector(0, 0, -1)
-		light := light.NewPoint(tuple.Point(0, 0, -10), color.RGB(1, 1, 1))
+		light := light.NewPointLight(tuple.Point(0, 0, -10), color.RGB(1, 1, 1))
 
 		result := m.Lighting(light, position, eyev, normalv)
 
@@ -49,7 +49,7 @@ func TestLighting(t *testing.T) {
 	t.Run("Lighting with the eye opposite surface, eye offset 45°", func(t *testing.T) {
 		eyev := tuple.Vector(0, 0, -1)
 		normalv := tuple.Vector(0, 0, -1)
-		light := light.NewPoint(tuple.Point(0, 10, -10), color.RGB(1, 1, 1))
+		light := light.NewPointLight(tuple.Point(0, 10, -10), color.RGB(1, 1, 1))
 
 		result := m.Lighting(light, position, eyev, normalv)
 
@@ -59,7 +59,7 @@ func TestLighting(t *testing.T) {
 	t.Run("Lighting with the eye in the path of the refletion vector", func(t *testing.T) {
 		eyev := tuple.Vector(0, -math.Sqrt(2)/2, -math.Sqrt(2)/2)
 		normalv := tuple.Vector(0, 0, -1)
-		light := light.NewPoint(tuple.Point(0, 10, -10), color.RGB(1, 1, 1))
+		light := light.NewPointLight(tuple.Point(0, 10, -10), color.RGB(1, 1, 1))
 
 		result := m.Lighting(light, position, eyev, normalv)
 
@@ -69,7 +69,7 @@ func TestLighting(t *testing.T) {
 	t.Run("Lighting with the light behind the surface", func(t *testing.T) {
 		eyev := tuple.Vector(0, 0, -1)
 		normalv := tuple.Vector(0, 0, -1)
-		light := light.NewPoint(tuple.Point(0, 0, 10), color.RGB(1, 1, 1))
+		light := light.NewPointLight(tuple.Point(0, 0, 10), color.RGB(1, 1, 1))
 
 		result := m.Lighting(light, position, eyev, normalv)
 

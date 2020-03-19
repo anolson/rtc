@@ -37,7 +37,7 @@ func DefaultMaterial() *Material {
 
 // Lighting shades an objects so it appears three-dimensional
 func (m *Material) Lighting(
-	light *light.Light,
+	light *light.PointLight,
 	point *tuple.Tuple,
 	eyev *tuple.Tuple,
 	normalv *tuple.Tuple,

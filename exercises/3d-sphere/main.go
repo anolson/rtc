@@ -31,7 +31,7 @@ func main() {
 
 	lightPosition := tuple.Point(-10, 10, -10)
 	lightColor := color.RGB(1, 1, 1)
-	light := light.NewPoint(lightPosition, lightColor)
+	light := light.NewPointLight(lightPosition, lightColor)
 
 	for y := 0; y < canvasPixels; y++ {
 		for x := 0; x < canvasPixels; x++ {
