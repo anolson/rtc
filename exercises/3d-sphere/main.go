@@ -6,7 +6,6 @@ import (
 
 	"github.com/anolson/rtc/canvas"
 	"github.com/anolson/rtc/color"
-	"github.com/anolson/rtc/light"
 	"github.com/anolson/rtc/primitives"
 	"github.com/anolson/rtc/ray"
 	"github.com/anolson/rtc/tuple"
@@ -31,7 +30,7 @@ func main() {
 
 	lightPosition := tuple.Point(-10, 10, -10)
 	lightColor := color.RGB(1, 1, 1)
-	light := light.NewPointLight(lightPosition, lightColor)
+	light := primitives.NewPointLight(lightPosition, lightColor)
 
 	for y := 0; y < canvasPixels; y++ {
 		for x := 0; x < canvasPixels; x++ {

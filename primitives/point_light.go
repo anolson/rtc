@@ -1,4 +1,4 @@
-package light
+package primitives
 
 import (
 	"github.com/anolson/rtc/color"
