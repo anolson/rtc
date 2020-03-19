@@ -10,8 +10,8 @@ func TestNewIntersection(t *testing.T) {
 	s := NewSphere()
 	i := NewIntersection(3.5, s)
 
-	assert.Equal(t, s, i.object)
-	assert.Equal(t, 3.5, i.t)
+	assert.Equal(t, s, i.Object)
+	assert.Equal(t, 3.5, i.T)
 }
 
 func TestIntersectionAggregation(t *testing.T) {
@@ -21,8 +21,8 @@ func TestIntersectionAggregation(t *testing.T) {
 
 	intersections := []*Intersection{i1, i2}
 
-	assert.Equal(t, float64(1), intersections[0].t)
-	assert.Equal(t, float64(2), intersections[1].t)
+	assert.Equal(t, float64(1), intersections[0].T)
+	assert.Equal(t, float64(2), intersections[1].T)
 }
 
 func TestHit(t *testing.T) {

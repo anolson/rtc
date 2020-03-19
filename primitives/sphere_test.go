@@ -35,8 +35,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, 4.0, intersection[0].t)
-		assert.Equal(t, 6.0, intersection[1].t)
+		assert.Equal(t, 4.0, intersection[0].T)
+		assert.Equal(t, 6.0, intersection[1].T)
 	})
 
 	t.Run("A ray intersects a sphere at a tangent", func(t *testing.T) {
@@ -48,8 +48,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, 5.0, intersection[0].t)
-		assert.Equal(t, 5.0, intersection[1].t)
+		assert.Equal(t, 5.0, intersection[0].T)
+		assert.Equal(t, 5.0, intersection[1].T)
 	})
 
 	t.Run("A ray misses a sphere", func(t *testing.T) {
@@ -72,8 +72,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, -1.0, intersection[0].t)
-		assert.Equal(t, 1.0, intersection[1].t)
+		assert.Equal(t, -1.0, intersection[0].T)
+		assert.Equal(t, 1.0, intersection[1].T)
 	})
 
 	t.Run("A sphere is behind a ray", func(t *testing.T) {
@@ -85,8 +85,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, -6.0, intersection[0].t)
-		assert.Equal(t, -4.0, intersection[1].t)
+		assert.Equal(t, -6.0, intersection[0].T)
+		assert.Equal(t, -4.0, intersection[1].T)
 	})
 
 	t.Run("Intersect sets the object on the intersection", func(t *testing.T) {
@@ -98,8 +98,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, s, intersection[0].object)
-		assert.Equal(t, s, intersection[1].object)
+		assert.Equal(t, s, intersection[0].Object)
+		assert.Equal(t, s, intersection[1].Object)
 	})
 
 	t.Run("Intersecting a scaled sphere a ray", func(t *testing.T) {
@@ -112,8 +112,8 @@ func TestIntersection(t *testing.T) {
 		intersection := s.Intersect(r)
 
 		assert.Equal(t, 2, len(intersection))
-		assert.Equal(t, float64(3), intersection[0].t)
-		assert.Equal(t, float64(7), intersection[1].t)
+		assert.Equal(t, float64(3), intersection[0].T)
+		assert.Equal(t, float64(7), intersection[1].T)
 	})
 
 	t.Run("Intersecting a translated sphere a ray", func(t *testing.T) {
