@@ -31,12 +31,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
   pruneopts = "UT"
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
 
 [[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
@@ -47,15 +47,23 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:972c2427413d41a1e06ca4897e8528e5a1622894050e2f527b38ddf0f343f759"
+  digest = "1:5e8f46b412421d2d6cceea845d28ac46f3f5a5f60a6e86f0ee75e24fd43a02a9"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
   pruneopts = "UT"
-  revision = "ffdc059bfe9ce6a4e144ba849dbedead332c6053"
-  version = "v1.3.0"
+  revision = "3ebf1ddaeb260c4b1ae502a01c7844fa8c1fa0e9"
+  version = "v1.5.1"
 
 [[projects]]
-  digest = "1:23fe6c6a60e25700c53335117c4176780d207c7799958ad051d0a8b82b00efb6"
+  digest = "1:55b110c99c5fdc4f14930747326acce56b52cfce60b24b1c03ef686ac0e46bb1"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "53403b58ad1b561927d19068c655246f2db79d48"
+  version = "v2.2.8"
+
+[[projects]]
+  digest = "1:171ae0a98929d888864c28200d537c3032f85107286ab63063e7d732f5dc0b04"
   name = "gotest.tools"
   packages = [
     "assert",
@@ -66,8 +74,8 @@
     "internal/source",
   ]
   pruneopts = "UT"
-  revision = "b6e20af1ed078cd01a6413b734051a292450b4cb"
-  version = "v2.1.0"
+  revision = "1083505acf35a0bd8a696b26837e1fb3187a7a83"
+  version = "v2.3.0"
 
 [solve-meta]
   analyzer-name = "dep"
