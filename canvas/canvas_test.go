@@ -7,7 +7,7 @@ import (
 
 	"github.com/anolson/rtc/color"
 	"github.com/stretchr/testify/assert"
-	"gotest.tools/golden"
+	"gotest.tools/v3/golden"
 )
 
 func TestNew(t *testing.T) {
