@@ -19,3 +19,6 @@ Run all tests when any `.go` file is changed:
 ```
 $ make watch
 ```
+
+### Example
+![sphere](exercises/3d-sphere/sphere.png)

@@ -126,3 +126,10 @@ func Cross(a, b *Tuple) *Tuple {
 		(a.X*b.Y)-(a.Y*b.X),
 	)
 }
+
+// Reflect returns the result of the in vector around the normal
+func Reflect(in, normal *Tuple) *Tuple {
+	dot := Dot(in, normal)
+
+	return Subtract(in, Multiply(Multiply(normal, 2), dot))
+}

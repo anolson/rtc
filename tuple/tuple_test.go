@@ -165,3 +165,23 @@ func TestCross(t *testing.T) {
 	assert.Equal(t, Vector(-1, 2, -1), Cross(v1, v2))
 	assert.Equal(t, Vector(1, -2, 1), Cross(v2, v1))
 }
+
+func TestReflect(t *testing.T) {
+	t.Run("Reflecting a vector approaching at 45°", func(t *testing.T) {
+		v := Vector(1, -1, 0)
+		n := Vector(0, 1, 0)
+
+		r := Reflect(v, n)
+
+		assert.Equal(t, Vector(1, 1, 0), r)
+	})
+
+	t.Run("Reflecting a vector off a slanted surface", func(t *testing.T) {
+		v := Vector(0, -1, 0)
+		n := Vector(math.Sqrt(2)/2, math.Sqrt(2)/2, 0)
+
+		r := Reflect(v, n)
+
+		assert.True(t, Vector(1, 0, 0).Equal(r))
+	})
+}

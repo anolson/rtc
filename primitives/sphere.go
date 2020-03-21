@@ -10,12 +10,14 @@ import (
 
 // Sphere represents a 3D Spherical shape
 type Sphere struct {
+	Material  *Material
 	Transform *matrix.Matrix
 }
 
 // NewSphere returns a new Sphere object
 func NewSphere() *Sphere {
 	return &Sphere{
+		Material:  DefaultMaterial(),
 		Transform: matrix.Identity(),
 	}
 }
@@ -25,7 +27,7 @@ func (s *Sphere) SetTransform(transform *matrix.Matrix) {
 	s.Transform = transform
 }
 
-// Intersect returns the intersection of a ray through sphere
+// Intersect returns the intersection of a ray through a sphere
 func (s *Sphere) Intersect(r *ray.Ray) []*Intersection {
 	inverseTransform, _ := matrix.Inverse(s.Transform)
 	r2 := r.Transform(inverseTransform)
@@ -49,4 +51,18 @@ func (s *Sphere) Intersect(r *ray.Ray) []*Intersection {
 		NewIntersection(t1, s),
 		NewIntersection(t2, s),
 	}
+}
+
+// NormalAt returns the normal of a sphere at a point
+func (s *Sphere) NormalAt(worldPoint *tuple.Tuple) *tuple.Tuple {
+	origin := tuple.Point(0, 0, 0)
+	inverseTransform, _ := matrix.Inverse(s.Transform)
+	objectPoint := matrix.MultiplyByTuple(inverseTransform, worldPoint)
+	objectNormal := tuple.Subtract(objectPoint, origin)
+
+	transposed := matrix.Transpose(inverseTransform)
+	worldNormal := matrix.MultiplyByTuple(transposed, objectNormal)
+	worldNormal.W = 0
+
+	return worldNormal.Normalize()
 }

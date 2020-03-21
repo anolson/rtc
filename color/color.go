@@ -1,12 +1,23 @@
 package color
 
-import "math"
+import (
+	"math"
+
+	"github.com/anolson/rtc/util"
+)
 
 // Color represents an rgb color
 type Color struct {
 	Red   float64
 	Green float64
 	Blue  float64
+}
+
+// Equal returns true if a Color is equal to another, otherwise false
+func (c *Color) Equal(other *Color) bool {
+	return util.Approx(c.Red, other.Red) &&
+		util.Approx(c.Green, other.Green) &&
+		util.Approx(c.Blue, other.Blue)
 }
 
 // RGB returns a new Color object
